@@ -205,7 +205,11 @@ td .error{margin:0;font-size:inherit}
 #superAdminPanel .tableWrap{max-height:none}
 .waAction{border:0;border-radius:9px;background:#075e54;color:#fff;font-weight:800;font-size:11px;padding:7px 10px;white-space:nowrap;cursor:pointer}
 .waAction:hover{background:#054c44}
-.historyAction{background:#52616b}.historyAction:hover{background:#3f4c55}
+.historyAction{background:#52616b}.historyAction:hover{background:#3f4c55}.deleteAction{background:#b3302b}.deleteAction:hover{background:#8e241f}
+.participantSortBar{display:grid;grid-template-columns:auto 1fr 1fr;gap:7px;align-items:center;margin-top:10px;padding:9px 10px;background:#f7faf8;border:1px solid #dfe9e4;border-radius:12px}
+.participantSortBar .sortLabel{font-size:11px;font-weight:800;color:var(--teal-800);white-space:nowrap}
+.participantSortBar select{min-height:38px;border:1px solid #ccdcd6;border-radius:9px;background:#fff;color:var(--ink);padding:5px 8px;font-size:12px;min-width:0}
+@media(max-width:599px){.participantSortBar{grid-template-columns:1fr 1fr}.participantSortBar .sortLabel{grid-column:1/-1}.participantSortBar select{width:100%;font-size:11.5px}}
 .summaryTitle{margin-top:14px;font-size:13px;font-weight:800;color:var(--teal-800);letter-spacing:.3px}
 .genderSummary{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .genderCard{background:#fff;border:1px solid #d9e4df;border-radius:14px;padding:11px 12px}
@@ -253,7 +257,50 @@ td .error{margin:0;font-size:inherit}
 #toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#16313a;color:#fff;padding:11px 18px;border-radius:24px;font-size:13px;font-weight:700;z-index:90;max-width:88vw;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 #toast.on{opacity:1}
 
-@media(max-width:599px){.heroChips{gap:6px;margin-top:16px}.eventChip,.chip{font-size:11px;padding:6px 11px}}
+@media(max-width:599px){
+  .header{padding-bottom:20px;border-radius:0 0 22px 22px}
+  .brand{font-size:9px;letter-spacing:1.1px}
+  .adminTop{padding:6px 10px;font-size:10px}
+  h1{font-size:clamp(23px,6.5vw,34px);margin:11px 0 0}
+  .urduTitle{font-size:20px;line-height:1.75}
+  .subtitle{font-size:10px;letter-spacing:1.8px}
+  .heroChips{gap:5px;margin-top:10px}
+  .eventChip,.chip{font-size:10px;padding:5px 8px}
+  .content{padding:3px 10px 0}
+  .steps{margin:0 -10px;padding:7px 10px 6px;gap:4px}
+  .step{font-size:9px;padding:7px 3px;border-radius:9px}
+  .card{padding:13px;border-radius:15px;margin-bottom:9px}
+  .cardHead{gap:7px;margin-bottom:8px}
+  .cardHead .ico{width:29px;height:29px;border-radius:9px;font-size:14px}
+  .title{font-size:17px}
+  .sub{font-size:11px}
+  .notice{padding:8px 10px;font-size:11.5px;margin:9px 0}
+  .field{margin-top:9px}
+  .field label{font-size:10px;margin-bottom:4px}
+  .field input,.field select{height:45px;border-radius:11px;padding:0 11px}
+  .primary,.secondary,.gold{min-height:45px;border-radius:11px;margin-top:9px;font-size:13px}
+  .progGrid{gap:5px;margin-top:8px}
+  .info{padding:7px 9px;border-radius:9px;font-size:11.5px}
+  .info small{font-size:8px}
+  .ulamaHead{margin:10px 0 6px;font-size:10px}
+  .ulamaGrid{gap:6px}
+  .ulama{padding:9px 8px;border-radius:11px}
+  .ulama b{font-size:13px;margin:4px auto;padding:5px 7px}
+  .ulama .honor,.ulama .hafiz{font-size:9.5px}
+  .ulama .ur{font-size:12px;line-height:1.7}
+  .hidayaat{gap:5px;margin-top:7px}
+  .hidayaat li{gap:7px;font-size:11.5px}
+  .hidayaat li.must{padding:6px 8px}
+  .contactRow{gap:5px;margin-top:7px}
+  .contact{padding:8px 10px;border-radius:10px}
+  .contact small{font-size:9px}
+  .contact a{font-size:14px;margin:2px 9px 0 0}
+  .posterCard{gap:9px}
+  .posterLabel{width:70px}
+  .posterText b{font-size:12px}
+  .posterText span{font-size:10px}
+  .footer{margin-top:18px;padding:18px 12px 100px}
+}
 /* ============================ SMALL PHONES ============================ */
 @media(max-width:350px){h1{font-size:23px}.grid,.paygrid,.row2,.progGrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.bulkGrid,.bulkActions,.manualGrid,.genderSummary{grid-template-columns:1fr}}
 
@@ -378,6 +425,61 @@ td .error{margin:0;font-size:inherit}
   .tblParticipants .muted{font-size:10px!important}
 }
 
+
+/* ---------- participants table: MOBILE usability ----------
+   Keep identity visible while horizontally scrolling to the Action column.
+   Sticky: Name only on the left. Action scrolls normally. */
+@media(max-width:599px){
+  #adminCard .tableWrap{
+    overflow-x:auto;
+    overflow-y:auto;
+    max-height:66vh;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+  }
+  .tblParticipants{
+    min-width:1080px;
+    width:1080px;
+    border-collapse:separate;
+    border-spacing:0;
+    table-layout:auto;
+  }
+  .tblParticipants th,.tblParticipants td{
+    font-size:10.5px;
+    line-height:1.25;
+    padding:7px 7px;
+    white-space:nowrap;
+  }
+  .tblParticipants th{font-size:9.5px;padding:8px 7px}
+  .tblParticipants th:nth-child(1),.tblParticipants td:nth-child(1){width:34px;min-width:34px;max-width:34px;text-align:center}
+  .tblParticipants th:nth-child(2),.tblParticipants td:nth-child(2){width:78px;min-width:78px;max-width:78px}
+  .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){width:125px;min-width:125px;max-width:125px}
+  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){width:45px;min-width:45px}
+  .tblParticipants th:nth-child(5),.tblParticipants td:nth-child(5){width:65px;min-width:65px}
+  .tblParticipants th:nth-child(6),.tblParticipants td:nth-child(6){width:90px;min-width:90px}
+  .tblParticipants th:nth-child(7),.tblParticipants td:nth-child(7){width:105px;min-width:105px}
+  .tblParticipants th:nth-child(8),.tblParticipants td:nth-child(8){width:75px;min-width:75px}
+  .tblParticipants th:nth-child(9),.tblParticipants td:nth-child(9){width:130px;min-width:130px}
+  .tblParticipants th:nth-child(10),.tblParticipants td:nth-child(10){width:105px;min-width:105px}
+  .tblParticipants th:nth-child(11),.tblParticipants td:nth-child(11){width:72px;min-width:72px}
+  .tblParticipants th:nth-child(12),.tblParticipants td:nth-child(12){width:100px;min-width:100px}
+  .tblParticipants th:nth-child(13),.tblParticipants td:nth-child(13){width:155px;min-width:155px}
+
+  /* Freeze ONLY the Name column so the participant identity remains visible while scrolling. */
+  .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){
+    position:sticky;left:0;z-index:6;background:#fff;
+    box-shadow:3px 0 5px rgba(6,63,69,.10);
+  }
+  .tblParticipants th:nth-child(3){background:var(--teal-800);color:#fff;z-index:9}
+  .tblParticipants tbody tr:nth-child(even) td:nth-child(3){background:#fafcfb}
+  .tblParticipants tbody tr:hover td:nth-child(3){background:#f0f7f3}
+  .tblParticipants td:nth-child(2){font-weight:800;color:var(--teal-800)}
+  .tblParticipants td:nth-child(3){font-weight:800;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
+  .tblParticipants td select{font-size:10px;padding:4px 5px;max-width:100px}
+  .tblParticipants .waAction{font-size:9.5px;padding:6px 7px;margin:2px 1px}
+  .tblParticipants .muted{font-size:9px!important}
+}
+
 /* ---------- administrators table (5 columns): fits from 600px up ---------- */
 @media(min-width:600px){
   #superAdminPanel .tableWrap{overflow-x:hidden}
@@ -388,6 +490,15 @@ td .error{margin:0;font-size:inherit}
   .tblAdmins th:nth-child(4){width:24%}.tblAdmins th:nth-child(5){width:15%}
   .tblAdmins .secondary{width:100%;padding:6px 4px}
 }
+
+.youtubePromo{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fff7f7,#fff);border:1px solid #f0cccc;border-radius:13px;padding:10px 11px}
+.youtubeIcon{width:38px;height:28px;border-radius:8px;background:#e62117;color:#fff;display:grid;place-items:center;font-size:16px;flex:none}
+.youtubePromo .ytText{min-width:0;flex:1}
+.youtubePromo b{display:block;color:#7e1f1b;font-size:13px}
+.youtubePromo span{display:block;color:var(--muted);font-size:10.5px;line-height:1.35}
+.youtubeLinks{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
+.youtubeLinks a{font-size:10px;font-weight:800;text-decoration:none;color:#8a211c;background:#fff;border:1px solid #edc4c1;border-radius:999px;padding:4px 7px}
+.youtubeLinks a:hover{background:#fff0ef}
 </style>
 </head>
 <body>
@@ -449,6 +560,18 @@ td .error{margin:0;font-size:inherit}
    <div class="info"><small>TIME</small><b>Subah 9:30 baje se Namaz-e-Isha tak</b></div>
   </div>
   <a class="btnlink map" href="https://maps.app.goo.gl/AeNpn1CwEe3KBpJMA" target="_blank" rel="noopener">📍 Open Location in Google Maps</a>
+  <div class="youtubePromo" style="margin-top:8px">
+    <div class="youtubeIcon">▶</div>
+    <div class="ytText">
+      <b>Ulma-e-Ahle-Hadees Solapur</b>
+      <span>Deeni lectures, programmes &amp; useful Islamic content — follow the official channel.</span>
+      <div class="youtubeLinks">
+        <a href="https://www.youtube.com/@ulmaeahlehadeessolapur" target="_blank" rel="noopener noreferrer">▶ Channel</a>
+        <a href="https://www.youtube.com/@ulmaeahlehadeessolapur/videos" target="_blank" rel="noopener noreferrer">🎥 Videos</a>
+        <a href="https://www.youtube.com/@ulmaeahlehadeessolapur/playlists" target="_blank" rel="noopener noreferrer">📚 Playlists</a>
+      </div>
+    </div>
+  </div>
  </div>
 
  <div class="card span2">
@@ -604,6 +727,27 @@ td .error{margin:0;font-size:inherit}
    </details>
    <div class="row2"><button type="button" class="secondary" data-action="adminRefresh">↻ Refresh</button><button type="button" class="secondary" data-action="adminExport">⬇ Export My Records</button></div>
    <div id="adminMsg" class="muted" style="margin-top:8px"></div>
+   <div class="participantSortBar">
+    <div class="sortLabel">↕ Sort participants</div>
+    <select id="participantSort" aria-label="Sort participants">
+      <option value="default">Default — newest first</option>
+      <option value="registrationNo">Registration No.</option>
+      <option value="name">Name</option>
+      <option value="age">Age</option>
+      <option value="gender">Gender</option>
+      <option value="city">City</option>
+      <option value="mobile">Mobile</option>
+      <option value="language">Language</option>
+      <option value="paymentStatus">Payment</option>
+      <option value="registrationStatus">Status</option>
+      <option value="confirmedBy">Confirmed By</option>
+      <option value="timestamp">Registration Time</option>
+    </select>
+    <select id="participantSortDir" aria-label="Sort direction">
+      <option value="asc">A → Z / Low → High</option>
+      <option value="desc">Z → A / High → Low</option>
+    </select>
+   </div>
    <div class="tableWrap"><table class="tblParticipants"><thead><tr><th class="pickHead"><input type="checkbox" id="bulkSelectAllTable" data-action="bulkSelectAll" title="Select all visible"></th><th>Reg No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Confirmed By</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
   </div>
  </div>
@@ -692,10 +836,43 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const digits10 = v => String(v || '').replace(/\D/g, '').slice(-10);
 const MOBILE_RE = /^[6-9]\d{9}$/;
-const state = { regBusy:false, regReq:0, regNo:'', mobile:'', name:'', gender:'', participant:null, pin:'', adminRole:'', adminId:null, adminName:'', rows:[], manualPin:'', shot:null, shotBusy:null, bulkSelected:new Set() };
+const state = { regBusy:false, regReq:0, regNo:'', mobile:'', name:'', gender:'', participant:null, pin:'', adminRole:'', adminId:null, adminName:'', rows:[], manualPin:'', shot:null, shotBusy:null, bulkSelected:new Set(), stage:'register', participantSort:'default', participantSortDir:'asc' };
 
 function store(v) { try { v ? localStorage.setItem(STORE_KEY, JSON.stringify(v)) : localStorage.removeItem(STORE_KEY); } catch (e) {} }
 function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { return null; } }
+
+const DRAFT_KEY = 'erw_form_draft_v2';
+function saveDraft(stage) {
+  try {
+    const d = {
+      stage: stage || state.stage || 'register',
+      name: $('name') ? $('name').value.trim() : '',
+      age: $('age') ? $('age').value : '',
+      gender: $('gender') ? $('gender').value : '',
+      city: $('city') ? $('city').value : '',
+      mobile: $('mobile') ? $('mobile').value : '',
+      language: $('language') ? $('language').value : '',
+      regNo: state.regNo || '',
+      mobileState: state.mobile || '',
+      nameState: state.name || '',
+      genderState: state.gender || '',
+      savedAt: Date.now()
+    };
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+  } catch (e) {}
+}
+function loadDraft() {
+  try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch (e) { return null; }
+}
+function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
+function restoreDraft() {
+  const d = loadDraft();
+  if (!d) return null;
+  const put = (id,v) => { const el=$(id); if (el && v != null) el.value=v; };
+  put('name',d.name); put('age',d.age); put('gender',d.gender); put('city',d.city); put('mobile',d.mobile); put('language',d.language);
+  if (d.regNo) { state.regNo=d.regNo; state.mobile=d.mobileState || d.mobile || ''; state.name=d.nameState || d.name || ''; state.gender=d.genderState || d.gender || ''; }
+  return d;
+}
 
 let toastTimer;
 function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('on'), 2600); }
@@ -767,6 +944,8 @@ async function call(fn, args) {
         return await rpc('admin_set_active', { p_super_pin: args[0], p_admin_id: Number(args[1]), p_active: !!args[2] });
       case 'adminHistory':
         return await rpc('admin_registration_history', { p_pin: args[0], p_reg: args[1] });
+      case 'adminDeleteCancelled':
+        return await rpc('admin_delete_cancelled', { p_pin: args[0], p_reg: args[1] });
       case 'adminUpdate': {
         const r = await rpc('admin_update_role', { p_pin: args[0], p_reg: args[1], p_note: args[2], p_status: args[3] });
         if (r && r.ok) decorate(r.row);
@@ -807,6 +986,10 @@ function showScreen(id, step) {
   const navId = NAV[id];
   const navEl = navId ? $(navId) : null;
   if (navEl) navEl.classList.add('active');
+  if (id === 'registerCard' || id === 'paymentCard' || id === 'confirmCard') {
+    state.stage = id === 'paymentCard' ? 'payment' : id === 'confirmCard' ? 'confirm' : 'register';
+    saveDraft(state.stage);
+  }
   scrollTop();
 }
 
@@ -854,7 +1037,7 @@ async function chooseCash() {
   try {
     const res = await call('chooseCash', [state.regNo, state.mobile]);
     if (!res || res.ok === false) throw new Error((res && res.message) || 'Could not save. Please try again.');
-    state.participant = res; store(null);
+    state.participant = res; store(null); clearDraft();
     renderConfirm(res); showScreen('confirmCard', 3);
   } catch (e) { $('payError').textContent = e.message; }
   finally { btn.disabled = false; btn.textContent = label; }
@@ -917,7 +1100,7 @@ async function submitShot() {
   try {
     const res = await call('uploadPaymentScreenshot', [state.regNo, state.mobile, state.shot]);
     if (!res || res.ok === false) throw new Error((res && res.message) || 'Upload failed.');
-    state.participant = res; store(null);
+    state.participant = res; store(null); clearDraft();
     renderConfirm(res); showScreen('confirmCard', 3);
   } catch (e) {
     $('payError').textContent = e.message;
@@ -1232,13 +1415,56 @@ async function toggleAdmin(t) {
   const active=t.dataset.active==='1';
   try { const res=await call('adminSetActive',[state.pin,t.dataset.adminId,active]); if(!res||res.ok===false) throw new Error((res&&res.message)||'Unable to update admin.'); await loadAdminAccounts(); } catch(e){ $('superAdminError').textContent=e.message; }
 }
+async function deleteCancelled(reg) {
+  if (state.adminRole !== 'SUPER_ADMIN') { $('adminMsg').textContent='Only Super Admin can delete registrations.'; return; }
+  const r = state.rows.find(x => x.registrationNo === reg);
+  if (!r || String(r.registrationStatus || '').toUpperCase() !== 'CANCELLED') {
+    $('adminMsg').textContent='Only CANCELLED registrations can be deleted.';
+    return;
+  }
+  if (!window.confirm('Permanently delete CANCELLED registration ' + reg + ' (' + (r.name || '') + ')?\\n\\nThis cannot be undone.')) return;
+  $('adminMsg').textContent='Deleting ' + reg + '...';
+  try {
+    const res = await call('adminDeleteCancelled',[state.pin,reg]);
+    if (!res || res.ok === false) throw new Error((res && res.message) || 'Delete failed.');
+    state.bulkSelected.delete(String(reg));
+    state.rows = state.rows.filter(x => x.registrationNo !== reg);
+    renderAdmin();
+    $('adminMsg').textContent = reg + ' permanently deleted.';
+    toast(reg + ' deleted');
+  } catch(e) {
+    $('adminMsg').textContent=e.message;
+  }
+}
 async function showHistory(reg) {
   try { const res=await call('adminHistory',[state.pin,reg]); if(!res||res.ok===false) throw new Error((res&&res.message)||'Unable to load history.'); const items=res.history||[]; const text=items.length ? items.map(x=>formatDateTime(x.createdAt)+' — '+(x.adminName||'Unknown')+' — '+x.action+' — '+(x.oldStatus||'-')+' → '+(x.newStatus||'-')+(x.note?' — '+x.note:'')).join('\n') : 'No status history recorded.'; window.alert('Registration History: '+reg+'\n\n'+text); } catch(e){ $('adminMsg').textContent=e.message; }
 }
+function sortParticipantRows(rows) {
+  const key = state.participantSort || 'default';
+  const dir = state.participantSortDir === 'desc' ? -1 : 1;
+  const out = rows.slice();
+  if (key === 'default') return out.reverse();
+  const value = r => {
+    const v = r ? r[key] : '';
+    if (key === 'age') return Number(v || 0);
+    if (key === 'timestamp' || key === 'confirmedAt') { const t = Date.parse(v || ''); return Number.isNaN(t) ? 0 : t; }
+    return String(v == null ? '' : v).trim().toLowerCase();
+  };
+  out.sort((a,b) => {
+    const av=value(a), bv=value(b);
+    if (av < bv) return -1 * dir;
+    if (av > bv) return 1 * dir;
+    return String(a.registrationNo || '').localeCompare(String(b.registrationNo || ''), undefined, {numeric:true, sensitivity:'base'});
+  });
+  return out;
+}
 function renderAdmin() {
+  if ($('participantSort')) $('participantSort').value = state.participantSort || 'default';
+  if ($('participantSortDir')) $('participantSortDir').value = state.participantSortDir || 'asc';
   const q = $('adminSearch').value.toLowerCase().trim();
-  const rows = q ? state.rows.filter(r => [r.registrationNo, r.name, r.mobile, r.city, r.language, r.registrationStatus].join(' ').toLowerCase().includes(q)) : state.rows;
-  $('adminRows').innerHTML = rows.slice().reverse().map(r => {
+  const filtered = q ? state.rows.filter(r => [r.registrationNo, r.name, r.mobile, r.city, r.language, r.registrationStatus, r.gender, r.paymentStatus, r.confirmedBy].join(' ').toLowerCase().includes(q)) : state.rows;
+  const rows = sortParticipantRows(filtered);
+  $('adminRows').innerHTML = rows.map(r => {
     const st = String(r.registrationStatus || '').toUpperCase();
     const sel = ['CONFIRMED','INCOMPLETE','CANCELLED'].map(o => '<option' + (o === st ? ' selected' : '') + '>' + o + '</option>').join('');
     const u = safeUrl(r.screenshotUrl);
@@ -1247,9 +1473,11 @@ function renderAdmin() {
       '</td><td><select class="statusSel" data-reg="' + esc(r.registrationNo) + '">' + sel + '</select></td><td>' +
       (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">Open</a>' : '-') + '</td><td>' +
       (r.confirmedBy ? esc(r.confirmedBy) + (r.confirmedAt ? '<div class="muted" style="font-size:10px">' + esc(formatDateTime(r.confirmedAt)) + '</div>' : '') : '-') + '</td><td>' +
-      '<button type="button" class="waAction historyAction" data-action="history" data-reg="' + esc(r.registrationNo) + '">🕘 History</button>' +
+      '' +
       (String(r.registrationStatus || '').toUpperCase() === 'INCOMPLETE' ?
         ' <button type="button" class="waAction" data-action="paymentWhatsApp" data-reg="' + esc(r.registrationNo) + '">💬 WhatsApp</button>' : '') +
+      (state.adminRole === 'SUPER_ADMIN' && String(r.registrationStatus || '').toUpperCase() === 'CANCELLED' ?
+        ' <button type="button" class="waAction deleteAction" data-action="deleteCancelled" data-reg="' + esc(r.registrationNo) + '">🗑 Delete</button>' : '') +
       '</td></tr>';
   }).join('') || '<tr><td colspan="13">No registrations found.</td></tr>';
   updateBulkSelectionUI();
@@ -1390,10 +1618,11 @@ const actions = {
   manualSave: saveManualRegistration,
   paymentWhatsApp: t => { const r = state.rows.find(x => x.registrationNo === t.dataset.reg); if (r) whatsappPaymentReminder(r); },
   history: t => showHistory(t.dataset.reg),
+  deleteCancelled: t => deleteCancelled(t.dataset.reg),
   createAdmin: createAdmin,
   toggleAdmin: toggleAdmin,
   resume: goPayment,
-  discardResume: () => { store(null); state.regNo = ''; state.mobile = ''; state.name = ''; state.gender = ''; $('resumeBox').hidden = true; },
+  discardResume: () => { store(null); clearDraft(); state.regNo = ''; state.mobile = ''; state.name = ''; state.gender = ''; $('resumeBox').hidden = true; },
   resumeFromConfirm: goPayment,
   prefillLookup: t => { $('lookupNo').value = t.dataset.reg || ''; $('lookupMob').value = t.dataset.mob || ''; showScreen('lookupCard'); }
 };
@@ -1406,6 +1635,8 @@ document.addEventListener('click', e => {
 $('form').addEventListener('submit', onRegister);
 $('shot').addEventListener('change', onShotChange);
 $('adminSearch').addEventListener('input', renderAdmin);
+$('participantSort').addEventListener('change', e => { state.participantSort = e.target.value; renderAdmin(); });
+$('participantSortDir').addEventListener('change', e => { state.participantSortDir = e.target.value; renderAdmin(); });
 $('adminRows').addEventListener('change', e => {
   if (e.target.classList.contains('statusSel')) onStatusChange(e.target);
   if (e.target.classList.contains('pickRow')) bulkToggleRow(e.target);
@@ -1418,8 +1649,27 @@ $('manualPin').addEventListener('keydown', e => { if (e.key === 'Enter') manualL
 $('lookupMob').addEventListener('keydown', e => { if (e.key === 'Enter') doLookup(); });
 ['mobile','lookupMob'].forEach(id => $(id).addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d+ ]/g, ''); }));
 $('manualMobile').addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d+ ]/g, ''); });
+['name','age','gender','city','mobile','language'].forEach(id => {
+  const el=$(id);
+  if (el) el.addEventListener('input', () => saveDraft('register'));
+  if (el) el.addEventListener('change', () => saveDraft('register'));
+});
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveDraft(state.stage); });
+window.addEventListener('pagehide', () => saveDraft(state.stage));
+window.addEventListener('pageshow', () => {
+  if (!state.pin) {
+    const d=restoreDraft();
+    if (d && d.stage==='payment' && d.regNo && d.mobile) {
+      setTimeout(() => { renderPayment(); showScreen('paymentCard',2); }, 30);
+    }
+  }
+});
 
+const initialDraft = restoreDraft();
 checkPending();
+if (initialDraft && initialDraft.stage === 'payment' && initialDraft.regNo && initialDraft.mobile) {
+  setTimeout(() => { renderPayment(); showScreen('paymentCard',2); }, 30);
+}
 if (!SB_OK) $('formError').textContent = 'Setup needed: set SUPABASE_URL and SUPABASE_KEY inside index.html.';
 else fetchT(BASE + '/auth/v1/health', { headers: sbHeaders() }, 15000).then(function (r) {
   if (r.status === 401 || r.status === 403) $('formError').textContent = 'Supabase key was not accepted. Copy the Publishable / anon key again (Step 5).';
