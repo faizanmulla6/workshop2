@@ -600,6 +600,197 @@ body{letter-spacing:.005em}
   .tblParticipants .pill{font-size:9px;padding:3px 7px}
   .tblParticipants td select{min-width:0;font-size:10.5px;padding:5px 2px}
 }
+
+/* =====================================================================
+   ADMIN PARTICIPANTS TABLE — sticky identity columns + desktop layout fix
+   Appended override: presentation only; no registration/admin logic changed.
+   ===================================================================== */
+
+/* Desktop and tablet: use a comfortably sized table with horizontal scrolling
+   rather than compressing all 14 columns into the viewport. */
+@media (min-width:600px) {
+  #adminCard .tableWrap {
+    width:100%;
+    max-width:100%;
+    overflow-x:auto !important;
+    overflow-y:auto;
+    max-height:68vh;
+    position:relative;
+    isolation:isolate;
+    scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;
+  }
+  #adminCard .tblParticipants {
+    width:1740px;
+    min-width:1740px;
+    table-layout:fixed;
+    border-collapse:separate;
+    border-spacing:0;
+  }
+  #adminCard .tblParticipants th,
+  #adminCard .tblParticipants td {
+    box-sizing:border-box;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    padding:10px 9px;
+    line-height:1.35;
+    vertical-align:middle;
+  }
+  #adminCard .tblParticipants th { white-space:normal; }
+  #adminCard .tblParticipants th:nth-child(1),
+  #adminCard .tblParticipants td:nth-child(1) { width:42px; min-width:42px; max-width:42px; }
+  #adminCard .tblParticipants th:nth-child(2),
+  #adminCard .tblParticipants td:nth-child(2) { width:118px; min-width:118px; max-width:118px; }
+  #adminCard .tblParticipants th:nth-child(3),
+  #adminCard .tblParticipants td:nth-child(3) { width:88px; min-width:88px; max-width:88px; }
+  #adminCard .tblParticipants th:nth-child(4),
+  #adminCard .tblParticipants td:nth-child(4) { width:230px; min-width:230px; max-width:230px; }
+  #adminCard .tblParticipants th:nth-child(5),
+  #adminCard .tblParticipants td:nth-child(5) { width:62px; min-width:62px; }
+  #adminCard .tblParticipants th:nth-child(6),
+  #adminCard .tblParticipants td:nth-child(6) { width:92px; min-width:92px; }
+  #adminCard .tblParticipants th:nth-child(7),
+  #adminCard .tblParticipants td:nth-child(7) { width:140px; min-width:140px; }
+  #adminCard .tblParticipants th:nth-child(8),
+  #adminCard .tblParticipants td:nth-child(8) { width:132px; min-width:132px; }
+  #adminCard .tblParticipants th:nth-child(9),
+  #adminCard .tblParticipants td:nth-child(9) { width:105px; min-width:105px; }
+  #adminCard .tblParticipants th:nth-child(10),
+  #adminCard .tblParticipants td:nth-child(10) { width:130px; min-width:130px; }
+  #adminCard .tblParticipants th:nth-child(11),
+  #adminCard .tblParticipants td:nth-child(11) { width:130px; min-width:130px; }
+  #adminCard .tblParticipants th:nth-child(12),
+  #adminCard .tblParticipants td:nth-child(12) { width:100px; min-width:100px; }
+  #adminCard .tblParticipants th:nth-child(13),
+  #adminCard .tblParticipants td:nth-child(13) { width:165px; min-width:165px; }
+  #adminCard .tblParticipants th:nth-child(14),
+  #adminCard .tblParticipants td:nth-child(14) { width:206px; min-width:206px; }
+
+  /* Freeze identity columns in a continuous stack. The Name column is fully
+     visible and does not slide underneath neighbouring cells. */
+  #adminCard .tblParticipants th:nth-child(1),
+  #adminCard .tblParticipants td:nth-child(1) {
+    position:sticky; left:0; z-index:7;
+    background:#fff; text-align:center;
+  }
+  #adminCard .tblParticipants th:nth-child(2),
+  #adminCard .tblParticipants td:nth-child(2) {
+    position:sticky; left:42px; z-index:7;
+    background:#fff;
+  }
+  #adminCard .tblParticipants th:nth-child(3),
+  #adminCard .tblParticipants td:nth-child(3) {
+    position:sticky; left:160px; z-index:7;
+    background:#fff;
+  }
+  #adminCard .tblParticipants th:nth-child(4),
+  #adminCard .tblParticipants td:nth-child(4) {
+    position:sticky; left:248px; z-index:8;
+    width:230px; min-width:230px; max-width:230px;
+    white-space:normal !important;
+    overflow:visible !important;
+    overflow-wrap:anywhere !important;
+    word-break:normal !important;
+    text-overflow:clip !important;
+    box-shadow:4px 0 8px rgba(6,63,69,.13);
+    background:#fff;
+  }
+  #adminCard .tblParticipants thead th:nth-child(-n+4) {
+    z-index:12;
+    background:linear-gradient(180deg,#0a5159,#063f45);
+    color:#fff;
+  }
+  #adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(-n+4) {
+    background:#f9fbfa;
+  }
+  #adminCard .tblParticipants tbody tr:hover td:nth-child(-n+4) {
+    background:#fff8e3;
+  }
+  #adminCard .tblParticipants td:nth-child(2),
+  #adminCard .tblParticipants td:nth-child(3) {
+    white-space:nowrap;
+    overflow-wrap:normal;
+  }
+  #adminCard .tblParticipants td:nth-child(3) .seatNoCell {
+    white-space:nowrap;
+    min-width:0;
+  }
+  #adminCard .tblParticipants td select {
+    width:100%;
+    min-width:0;
+    max-width:100%;
+  }
+  #adminCard .tblParticipants .waAction {
+    display:inline-block;
+    margin:2px 3px 2px 0;
+    white-space:normal;
+    max-width:100%;
+  }
+}
+
+/* Phones: retain the existing mobile-sized table, but use measured offsets
+   for each frozen column so the Name cell cannot be clipped by the old 196px
+   offset or covered by the Seat No column. */
+@media (max-width:599px) {
+  #adminCard .tableWrap {
+    overflow-x:auto !important;
+    overflow-y:auto;
+    position:relative;
+    isolation:isolate;
+    max-height:66vh;
+    -webkit-overflow-scrolling:touch;
+  }
+  #adminCard .tblParticipants {
+    width:1218px;
+    min-width:1218px;
+    table-layout:fixed;
+    border-collapse:separate;
+    border-spacing:0;
+  }
+  #adminCard .tblParticipants th:nth-child(1),
+  #adminCard .tblParticipants td:nth-child(1) {
+    position:sticky; left:0; z-index:7;
+    width:34px; min-width:34px; max-width:34px;
+    background:#fff;
+  }
+  #adminCard .tblParticipants th:nth-child(2),
+  #adminCard .tblParticipants td:nth-child(2) {
+    position:sticky; left:34px; z-index:7;
+    width:90px; min-width:90px; max-width:90px;
+    background:#fff;
+  }
+  #adminCard .tblParticipants th:nth-child(3),
+  #adminCard .tblParticipants td:nth-child(3) {
+    position:sticky; left:124px; z-index:7;
+    width:72px; min-width:72px; max-width:72px;
+    background:#fff;
+  }
+  #adminCard .tblParticipants th:nth-child(4),
+  #adminCard .tblParticipants td:nth-child(4) {
+    position:sticky; left:196px; z-index:8;
+    width:145px; min-width:145px; max-width:145px;
+    white-space:normal !important;
+    overflow:visible !important;
+    overflow-wrap:anywhere !important;
+    word-break:normal !important;
+    text-overflow:clip !important;
+    box-shadow:3px 0 7px rgba(6,63,69,.14);
+    background:#fff;
+  }
+  #adminCard .tblParticipants thead th:nth-child(-n+4) {
+    z-index:12;
+    background:linear-gradient(180deg,#0a5159,#063f45);
+    color:#fff;
+  }
+  #adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(-n+4) {
+    background:#f9fbfa;
+  }
+  #adminCard .tblParticipants tbody tr:hover td:nth-child(-n+4) {
+    background:#fff8e3;
+  }
+}
+
 </style>
 </head>
 <body>
