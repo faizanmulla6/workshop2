@@ -1,5 +1,0 @@
-timestamp,registration,mobile,status,detail
-"2026-10-03T12:05:22","TRW-000001","8892983378","FAILED","Page.goto: Navigation to ""https://web.whatsapp.com/send?phone=918892983378"" is interrupted by another navigation to ""https://web.whatsapp.com/""
-Call log:
-  - navigating to ""https:/"
-"2026-10-03T12:07:47","TRW-000001","8892983378","SENT",""
