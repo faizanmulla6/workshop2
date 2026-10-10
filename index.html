@@ -791,6 +791,396 @@ body{letter-spacing:.005em}
   }
 }
 
+
+
+/* ================= PARTICIPANT TABLE — FINAL RESPONSIVE LAYOUT =================
+   Only the Name column stays frozen. Select, Reg No and Seat No scroll normally.
+   */
+.participantControls{margin-top:12px;padding:13px;background:linear-gradient(135deg,#f7fbf9,#fff);border:1px solid #d9e6e1;border-radius:15px}
+.participantControlsTitle{font-size:14px;font-weight:900;color:var(--teal-800);margin-bottom:10px}
+.participantControlGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.participantControl{display:block;min-width:0}
+.participantControl span{display:block;font-size:10.5px;font-weight:800;color:#52686b;margin:0 0 5px}
+.participantControl select{width:100%;min-width:0;height:40px;padding:6px 28px 6px 9px;border:1px solid #ceddd7;border-radius:10px;background:#fff;color:var(--ink);font-size:12px}
+.participantFilterFooter{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--muted)}
+#adminCard .tableWrap{overflow-x:auto!important;overflow-y:auto;position:relative;isolation:isolate;max-height:68vh;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+#adminCard .tblParticipants{border-collapse:separate;border-spacing:0;table-layout:fixed;width:1740px;min-width:1740px}
+#adminCard .tblParticipants th,#adminCard .tblParticipants td{box-sizing:border-box;white-space:normal;overflow-wrap:anywhere;word-break:normal;vertical-align:middle}
+/* Explicitly unfreeze every column except Name. */
+#adminCard .tblParticipants th:nth-child(1),#adminCard .tblParticipants td:nth-child(1),
+#adminCard .tblParticipants th:nth-child(2),#adminCard .tblParticipants td:nth-child(2),
+#adminCard .tblParticipants th:nth-child(3),#adminCard .tblParticipants td:nth-child(3){position:static!important;left:auto!important;z-index:auto!important;box-shadow:none!important}
+#adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){position:sticky!important;left:0!important;z-index:8;width:230px;min-width:230px;max-width:230px;white-space:normal!important;overflow:visible!important;overflow-wrap:anywhere!important;word-break:normal!important;text-overflow:clip!important;box-shadow:4px 0 8px rgba(6,63,69,.16);background:#fff}
+#adminCard .tblParticipants thead th:nth-child(4){z-index:14;background:linear-gradient(180deg,#0a5159,#063f45)!important;color:#fff}
+#adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(4){background:#f9fbfa}
+#adminCard .tblParticipants tbody tr:hover td:nth-child(4){background:#fff8e3}
+@media(min-width:600px){
+ #adminCard .tableWrap{max-height:62vh}
+ #adminCard .tblParticipants th,#adminCard .tblParticipants td{padding:10px 9px;line-height:1.35}
+ .participantControlGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:899px){.participantControlGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:599px){
+ .participantControls{padding:10px;border-radius:13px}
+ .participantControlsTitle{font-size:13px}
+ .participantControlGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .participantControl span{font-size:10px}
+ .participantControl select{height:42px;font-size:12px}
+ #adminCard .tableWrap{max-height:66vh}
+ #adminCard .tblParticipants{width:1218px;min-width:1218px;table-layout:fixed}
+ #adminCard .tblParticipants th,#adminCard .tblParticipants td{font-size:10.5px;line-height:1.25;padding:7px}
+ #adminCard .tblParticipants th{font-size:9.5px;padding:8px 7px}
+ #adminCard .tblParticipants th:nth-child(1),#adminCard .tblParticipants td:nth-child(1){width:34px;min-width:34px;max-width:34px}
+ #adminCard .tblParticipants th:nth-child(2),#adminCard .tblParticipants td:nth-child(2){width:90px;min-width:90px;max-width:90px}
+ #adminCard .tblParticipants th:nth-child(3),#adminCard .tblParticipants td:nth-child(3){width:72px;min-width:72px;max-width:72px}
+ #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){left:0!important;width:145px;min-width:145px;max-width:145px}
+ #adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5){width:45px;min-width:45px;max-width:45px}
+ #adminCard .tblParticipants th:nth-child(6),#adminCard .tblParticipants td:nth-child(6){width:72px;min-width:72px;max-width:72px}
+ #adminCard .tblParticipants th:nth-child(7),#adminCard .tblParticipants td:nth-child(7){width:90px;min-width:90px;max-width:90px}
+ #adminCard .tblParticipants th:nth-child(8),#adminCard .tblParticipants td:nth-child(8){width:100px;min-width:100px;max-width:100px}
+ #adminCard .tblParticipants th:nth-child(9),#adminCard .tblParticipants td:nth-child(9){width:75px;min-width:75px;max-width:75px}
+ #adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10){width:90px;min-width:90px;max-width:90px}
+ #adminCard .tblParticipants th:nth-child(11),#adminCard .tblParticipants td:nth-child(11){width:95px;min-width:95px;max-width:95px}
+ #adminCard .tblParticipants th:nth-child(12),#adminCard .tblParticipants td:nth-child(12){width:75px;min-width:75px;max-width:75px}
+ #adminCard .tblParticipants th:nth-child(13),#adminCard .tblParticipants td:nth-child(13){width:125px;min-width:125px;max-width:125px}
+ #adminCard .tblParticipants th:nth-child(14),#adminCard .tblParticipants td:nth-child(14){width:110px;min-width:110px;max-width:110px}
+}
+
+
+
+/* =====================================================================
+   ADMIN PARTICIPANTS TABLE — compact rows, sticky header, Name-only freeze
+   Presentation-only override. Existing filtering/sorting/data logic retained.
+   ===================================================================== */
+#adminCard .tableWrap {
+  position:relative;
+  overflow:auto !important;
+  max-height:62vh;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+}
+#adminCard .tblParticipants {
+  width:1320px;
+  min-width:1320px;
+  table-layout:fixed;
+  border-collapse:separate;
+  border-spacing:0;
+}
+#adminCard .tblParticipants th,
+#adminCard .tblParticipants td {
+  padding:5px 7px !important;
+  font-size:11px;
+  line-height:1.15;
+  vertical-align:middle;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+/* Keep the header row visible during vertical scrolling. */
+#adminCard .tblParticipants thead th {
+  position:sticky;
+  top:0;
+  z-index:5;
+  padding-top:7px !important;
+  padding-bottom:7px !important;
+  line-height:1.15;
+}
+/* Compact widths, sized around typical content rather than oversized fixed columns. */
+#adminCard .tblParticipants th:nth-child(1),#adminCard .tblParticipants td:nth-child(1){width:36px;min-width:36px;max-width:36px;text-align:center}
+#adminCard .tblParticipants th:nth-child(2),#adminCard .tblParticipants td:nth-child(2){width:96px;min-width:96px;max-width:96px}
+#adminCard .tblParticipants th:nth-child(3),#adminCard .tblParticipants td:nth-child(3){width:74px;min-width:74px;max-width:74px}
+#adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){width:160px;min-width:160px;max-width:160px}
+#adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5){width:48px;min-width:48px;max-width:48px;text-align:center}
+#adminCard .tblParticipants th:nth-child(6),#adminCard .tblParticipants td:nth-child(6){width:66px;min-width:66px;max-width:66px}
+#adminCard .tblParticipants th:nth-child(7),#adminCard .tblParticipants td:nth-child(7){width:100px;min-width:100px;max-width:100px}
+#adminCard .tblParticipants th:nth-child(8),#adminCard .tblParticipants td:nth-child(8){width:105px;min-width:105px;max-width:105px}
+#adminCard .tblParticipants th:nth-child(9),#adminCard .tblParticipants td:nth-child(9){width:72px;min-width:72px;max-width:72px}
+#adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10){width:92px;min-width:92px;max-width:92px}
+#adminCard .tblParticipants th:nth-child(11),#adminCard .tblParticipants td:nth-child(11){width:94px;min-width:94px;max-width:94px}
+#adminCard .tblParticipants th:nth-child(12),#adminCard .tblParticipants td:nth-child(12){width:74px;min-width:74px;max-width:74px}
+#adminCard .tblParticipants th:nth-child(13),#adminCard .tblParticipants td:nth-child(13){width:116px;min-width:116px;max-width:116px}
+#adminCard .tblParticipants th:nth-child(14),#adminCard .tblParticipants td:nth-child(14){width:187px;min-width:187px;max-width:187px}
+/* Freeze ONLY Name horizontally; checkbox, Reg No and Seat No scroll normally. */
+#adminCard .tblParticipants th:nth-child(4),
+#adminCard .tblParticipants td:nth-child(4) {
+  position:sticky;
+  left:0;
+  z-index:4;
+  box-shadow:3px 0 7px rgba(6,63,69,.12);
+  background:#fff;
+  white-space:normal !important;
+  overflow:visible !important;
+  overflow-wrap:anywhere !important;
+  text-overflow:clip !important;
+}
+#adminCard .tblParticipants thead th:nth-child(4) {
+  z-index:8;
+  background:linear-gradient(180deg,#0a5159,#063f45);
+  color:#fff;
+}
+#adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(4){background:#f9fbfa}
+#adminCard .tblParticipants tbody tr:hover td:nth-child(4){background:#fff8e3}
+/* Payment text should be smaller and normal-weight, not bold. */
+#adminCard .tblParticipants th:nth-child(10),
+#adminCard .tblParticipants td:nth-child(10),
+#adminCard .tblParticipants td:nth-child(10) .pill {
+  font-size:10px !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+  text-transform:none;
+}
+#adminCard .tblParticipants td select {font-size:10px;padding:3px 4px;min-height:26px}
+#adminCard .tblParticipants .waAction {font-size:10px;padding:5px 6px;margin:1px 2px 1px 0}
+#adminCard .tblParticipants .muted {font-size:9px !important}
+@media (min-width:1180px) {
+  #adminCard .tableWrap {max-height:62vh}
+  #adminCard .tblParticipants {width:1320px;min-width:1320px}
+  #adminCard .tblParticipants th,#adminCard .tblParticipants td {padding:5px 6px !important;font-size:10.5px;line-height:1.12}
+  #adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10),#adminCard .tblParticipants td:nth-child(10) .pill {font-size:9.5px !important;font-weight:400 !important}
+}
+@media (max-width:599px) {
+  #adminCard .tableWrap {max-height:60vh}
+  #adminCard .tblParticipants {width:1180px;min-width:1180px}
+  #adminCard .tblParticipants th,#adminCard .tblParticipants td {padding:5px 5px !important;font-size:10px;line-height:1.12}
+  #adminCard .tblParticipants th:nth-child(1),#adminCard .tblParticipants td:nth-child(1){width:32px;min-width:32px;max-width:32px}
+  #adminCard .tblParticipants th:nth-child(2),#adminCard .tblParticipants td:nth-child(2){width:88px;min-width:88px;max-width:88px}
+  #adminCard .tblParticipants th:nth-child(3),#adminCard .tblParticipants td:nth-child(3){width:68px;min-width:68px;max-width:68px}
+  #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){width:145px;min-width:145px;max-width:145px}
+  #adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5){width:42px;min-width:42px;max-width:42px}
+  #adminCard .tblParticipants th:nth-child(6),#adminCard .tblParticipants td:nth-child(6){width:60px;min-width:60px;max-width:60px}
+  #adminCard .tblParticipants th:nth-child(7),#adminCard .tblParticipants td:nth-child(7){width:86px;min-width:86px;max-width:86px}
+  #adminCard .tblParticipants th:nth-child(8),#adminCard .tblParticipants td:nth-child(8){width:96px;min-width:96px;max-width:96px}
+  #adminCard .tblParticipants th:nth-child(9),#adminCard .tblParticipants td:nth-child(9){width:66px;min-width:66px;max-width:66px}
+  #adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10){width:82px;min-width:82px;max-width:82px}
+  #adminCard .tblParticipants th:nth-child(11),#adminCard .tblParticipants td:nth-child(11){width:86px;min-width:86px;max-width:86px}
+  #adminCard .tblParticipants th:nth-child(12),#adminCard .tblParticipants td:nth-child(12){width:66px;min-width:66px;max-width:66px}
+  #adminCard .tblParticipants th:nth-child(13),#adminCard .tblParticipants td:nth-child(13){width:105px;min-width:105px;max-width:105px}
+  #adminCard .tblParticipants th:nth-child(14),#adminCard .tblParticipants td:nth-child(14){width:158px;min-width:158px;max-width:158px}
+  #adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10),#adminCard .tblParticipants td:nth-child(10) .pill {font-size:9px !important;font-weight:400 !important}
+}
+
+
+
+/* FINAL ADMIN TABLE OVERRIDE — freeze the complete header row vertically;
+   freeze ONLY the Name column horizontally; keep every header label uniform. */
+#adminCard .tableWrap {
+  position: relative !important;
+  overflow: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+#adminCard .tblParticipants thead th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 20 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  letter-spacing: .35px !important;
+  text-transform: uppercase;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  padding: 8px 6px !important;
+  background: linear-gradient(180deg,#0a5159,#063f45) !important;
+  color: #fff !important;
+  border-bottom: 2px solid #d8ad48 !important;
+}
+/* Remove horizontal freezing from checkbox, Reg No and Seat No. */
+#adminCard .tblParticipants th:nth-child(1),
+#adminCard .tblParticipants td:nth-child(1),
+#adminCard .tblParticipants th:nth-child(2),
+#adminCard .tblParticipants td:nth-child(2),
+#adminCard .tblParticipants th:nth-child(3),
+#adminCard .tblParticipants td:nth-child(3) {
+  position: static !important;
+  left: auto !important;
+  box-shadow: none !important;
+}
+/* Name is the only horizontally frozen column; header also stays at the top. */
+#adminCard .tblParticipants th:nth-child(4),
+#adminCard .tblParticipants td:nth-child(4) {
+  position: sticky !important;
+  left: 0 !important;
+  z-index: 10 !important;
+  box-shadow: 4px 0 8px rgba(6,63,69,.13) !important;
+}
+#adminCard .tblParticipants thead th:nth-child(4) {
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 30 !important;
+  background: linear-gradient(180deg,#0a5159,#063f45) !important;
+  color: #fff !important;
+}
+#adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(4) { background:#f9fbfa !important; }
+#adminCard .tblParticipants tbody tr:hover td:nth-child(4) { background:#fff8e3 !important; }
+#adminCard .tblParticipants td:nth-child(10) .pill,
+#adminCard .tblParticipants td:nth-child(10) { font-size: 11px !important; font-weight: 400 !important; }
+@media (max-width:599px) {
+  #adminCard .tableWrap { max-height:66vh !important; }
+  #adminCard .tblParticipants thead th { font-size:10px !important; padding:7px 5px !important; }
+  #adminCard .tblParticipants th:nth-child(4),
+  #adminCard .tblParticipants td:nth-child(4) {
+    left:0 !important;
+    width:145px !important; min-width:145px !important; max-width:145px !important;
+  }
+}
+@media (min-width:600px) {
+  #adminCard .tblParticipants th:nth-child(4),
+  #adminCard .tblParticipants td:nth-child(4) {
+    left:0 !important;
+    width:230px !important; min-width:230px !important; max-width:230px !important;
+  }
+}
+
+
+
+/* DEFINITIVE PARTICIPANT TABLE FIX — overrides all earlier conflicting table rules.
+   Vertical: every header cell stays fixed at the top of the table scroller.
+   Horizontal: ONLY the Name column is sticky; Reg No and Seat No scroll normally. */
+#adminCard .tableWrap {
+  position: relative !important;
+  display: block !important;
+  overflow: auto !important;
+  max-width: 100% !important;
+  max-height: 62vh !important;
+  isolation: isolate;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+#adminCard table.tblParticipants {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  table-layout: fixed !important;
+  width: 1320px !important;
+  min-width: 1320px !important;
+  margin: 0 !important;
+}
+#adminCard .tblParticipants th,
+#adminCard .tblParticipants td {
+  box-sizing: border-box !important;
+  padding: 5px 6px !important;
+  font-size: 10.5px !important;
+  line-height: 1.15 !important;
+  vertical-align: middle !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+/* All 14 header cells: same font size, weight, alignment, and vertical sticky behaviour. */
+#adminCard .tblParticipants thead th,
+#adminCard .tblParticipants thead th:nth-child(1),
+#adminCard .tblParticipants thead th:nth-child(2),
+#adminCard .tblParticipants thead th:nth-child(3),
+#adminCard .tblParticipants thead th:nth-child(4),
+#adminCard .tblParticipants thead th:nth-child(5),
+#adminCard .tblParticipants thead th:nth-child(6),
+#adminCard .tblParticipants thead th:nth-child(7),
+#adminCard .tblParticipants thead th:nth-child(8),
+#adminCard .tblParticipants thead th:nth-child(9),
+#adminCard .tblParticipants thead th:nth-child(10),
+#adminCard .tblParticipants thead th:nth-child(11),
+#adminCard .tblParticipants thead th:nth-child(12),
+#adminCard .tblParticipants thead th:nth-child(13),
+#adminCard .tblParticipants thead th:nth-child(14) {
+  position: sticky !important;
+  top: 0 !important;
+  left: auto !important;
+  z-index: 20 !important;
+  font-family: inherit !important;
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: .25px !important;
+  text-align: center !important;
+  text-transform: none !important;
+  white-space: normal !important;
+  padding: 7px 5px !important;
+  background: #063f45 !important;
+  color: #fff !important;
+  border-bottom: 2px solid #d8ad48 !important;
+}
+/* Compact widths: sum is 1320px on desktop/tablet. */
+#adminCard .tblParticipants th:nth-child(1),#adminCard .tblParticipants td:nth-child(1){width:36px !important;min-width:36px !important;max-width:36px !important;text-align:center !important}
+#adminCard .tblParticipants th:nth-child(2),#adminCard .tblParticipants td:nth-child(2){width:96px !important;min-width:96px !important;max-width:96px !important}
+#adminCard .tblParticipants th:nth-child(3),#adminCard .tblParticipants td:nth-child(3){width:74px !important;min-width:74px !important;max-width:74px !important}
+#adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){width:160px !important;min-width:160px !important;max-width:160px !important}
+#adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5){width:48px !important;min-width:48px !important;max-width:48px !important;text-align:center !important}
+#adminCard .tblParticipants th:nth-child(6),#adminCard .tblParticipants td:nth-child(6){width:66px !important;min-width:66px !important;max-width:66px !important}
+#adminCard .tblParticipants th:nth-child(7),#adminCard .tblParticipants td:nth-child(7){width:100px !important;min-width:100px !important;max-width:100px !important}
+#adminCard .tblParticipants th:nth-child(8),#adminCard .tblParticipants td:nth-child(8){width:105px !important;min-width:105px !important;max-width:105px !important}
+#adminCard .tblParticipants th:nth-child(9),#adminCard .tblParticipants td:nth-child(9){width:72px !important;min-width:72px !important;max-width:72px !important}
+#adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10){width:92px !important;min-width:92px !important;max-width:92px !important}
+#adminCard .tblParticipants th:nth-child(11),#adminCard .tblParticipants td:nth-child(11){width:94px !important;min-width:94px !important;max-width:94px !important}
+#adminCard .tblParticipants th:nth-child(12),#adminCard .tblParticipants td:nth-child(12){width:74px !important;min-width:74px !important;max-width:74px !important}
+#adminCard .tblParticipants th:nth-child(13),#adminCard .tblParticipants td:nth-child(13){width:116px !important;min-width:116px !important;max-width:116px !important}
+#adminCard .tblParticipants th:nth-child(14),#adminCard .tblParticipants td:nth-child(14){width:187px !important;min-width:187px !important;max-width:187px !important}
+/* Only Name stays frozen horizontally. First three columns are explicitly non-sticky. */
+#adminCard .tblParticipants th:nth-child(-n+3),
+#adminCard .tblParticipants td:nth-child(-n+3) {
+  left: auto !important;
+  box-shadow: none !important;
+}
+#adminCard .tblParticipants td:nth-child(-n+3) { position: static !important; }
+#adminCard .tblParticipants th:nth-child(4),
+#adminCard .tblParticipants td:nth-child(4) {
+  position: sticky !important;
+  left: 0 !important;
+  z-index: 10 !important;
+  box-shadow: 3px 0 7px rgba(6,63,69,.14) !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  background: #fff !important;
+}
+#adminCard .tblParticipants thead th:nth-child(4) {
+  position: sticky !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 40 !important;
+  background: #063f45 !important;
+  color: #fff !important;
+}
+#adminCard .tblParticipants tbody tr:nth-child(even) td { background: #f8fbf9; }
+#adminCard .tblParticipants tbody tr:hover td { background: #fff8e3; }
+#adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(4) { background: #f8fbf9 !important; }
+#adminCard .tblParticipants tbody tr:hover td:nth-child(4) { background: #fff8e3 !important; }
+/* Payment is normal-weight and compact, including its badge. */
+#adminCard .tblParticipants th:nth-child(10),
+#adminCard .tblParticipants td:nth-child(10),
+#adminCard .tblParticipants td:nth-child(10) *,
+#adminCard .tblParticipants th:nth-child(10) * {
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+#adminCard .tblParticipants td select { max-width: 100%; min-width: 0; font-size: 10px !important; padding: 3px 4px !important; min-height: 25px; }
+#adminCard .tblParticipants .waAction { font-size: 9.5px !important; padding: 4px 5px !important; margin: 1px !important; }
+#adminCard .tblParticipants .muted { font-size: 9px !important; }
+@media (max-width: 599px) {
+  #adminCard .tableWrap { max-height: 66vh !important; }
+  #adminCard table.tblParticipants { width:1180px !important; min-width:1180px !important; }
+  #adminCard .tblParticipants th,#adminCard .tblParticipants td { padding:5px 5px !important; font-size:10px !important; line-height:1.12 !important; }
+  #adminCard .tblParticipants thead th,
+  #adminCard .tblParticipants thead th:nth-child(1),#adminCard .tblParticipants thead th:nth-child(2),#adminCard .tblParticipants thead th:nth-child(3),#adminCard .tblParticipants thead th:nth-child(4),#adminCard .tblParticipants thead th:nth-child(5),#adminCard .tblParticipants thead th:nth-child(6),#adminCard .tblParticipants thead th:nth-child(7),#adminCard .tblParticipants thead th:nth-child(8),#adminCard .tblParticipants thead th:nth-child(9),#adminCard .tblParticipants thead th:nth-child(10),#adminCard .tblParticipants thead th:nth-child(11),#adminCard .tblParticipants thead th:nth-child(12),#adminCard .tblParticipants thead th:nth-child(13),#adminCard .tblParticipants thead th:nth-child(14) { font-size:10px !important; font-weight:800 !important; }
+  #adminCard .tblParticipants th:nth-child(1),#adminCard .tblParticipants td:nth-child(1){width:32px !important;min-width:32px !important;max-width:32px !important}
+  #adminCard .tblParticipants th:nth-child(2),#adminCard .tblParticipants td:nth-child(2){width:88px !important;min-width:88px !important;max-width:88px !important}
+  #adminCard .tblParticipants th:nth-child(3),#adminCard .tblParticipants td:nth-child(3){width:68px !important;min-width:68px !important;max-width:68px !important}
+  #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){width:145px !important;min-width:145px !important;max-width:145px !important}
+  #adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5){width:42px !important;min-width:42px !important;max-width:42px !important}
+  #adminCard .tblParticipants th:nth-child(6),#adminCard .tblParticipants td:nth-child(6){width:60px !important;min-width:60px !important;max-width:60px !important}
+  #adminCard .tblParticipants th:nth-child(7),#adminCard .tblParticipants td:nth-child(7){width:86px !important;min-width:86px !important;max-width:86px !important}
+  #adminCard .tblParticipants th:nth-child(8),#adminCard .tblParticipants td:nth-child(8){width:96px !important;min-width:96px !important;max-width:96px !important}
+  #adminCard .tblParticipants th:nth-child(9),#adminCard .tblParticipants td:nth-child(9){width:66px !important;min-width:66px !important;max-width:66px !important}
+  #adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10){width:82px !important;min-width:82px !important;max-width:82px !important}
+  #adminCard .tblParticipants th:nth-child(11),#adminCard .tblParticipants td:nth-child(11){width:86px !important;min-width:86px !important;max-width:86px !important}
+  #adminCard .tblParticipants th:nth-child(12),#adminCard .tblParticipants td:nth-child(12){width:66px !important;min-width:66px !important;max-width:66px !important}
+  #adminCard .tblParticipants th:nth-child(13),#adminCard .tblParticipants td:nth-child(13){width:105px !important;min-width:105px !important;max-width:105px !important}
+  #adminCard .tblParticipants th:nth-child(14),#adminCard .tblParticipants td:nth-child(14){width:158px !important;min-width:158px !important;max-width:158px !important}
+  #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){left:0 !important}
+  #adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10),#adminCard .tblParticipants td:nth-child(10) * {font-size:9px !important;font-weight:400 !important}
+}
+
 </style>
 </head>
 <body>
@@ -1030,26 +1420,20 @@ JazakAllahu Khairan.</textarea>
    </details>
    <div class="row2"><button type="button" class="secondary" data-action="adminRefresh">↻ Refresh</button><button type="button" class="secondary" data-action="adminExport">⬇ Export My Records</button></div>
    <div id="adminMsg" class="muted" style="margin-top:8px"></div>
-   <div class="participantSortBar">
-    <div class="sortLabel">↕ Sort participants</div>
-    <select id="participantSort" aria-label="Sort participants">
-      <option value="default">Default — newest first</option>
-      <option value="registrationNo">Registration No.</option>
-      <option value="name">Name</option>
-      <option value="age">Age</option>
-      <option value="gender">Gender</option>
-      <option value="city">City</option>
-      <option value="mobile">Mobile</option>
-      <option value="language">Language</option>
-      <option value="paymentStatus">Payment</option>
-      <option value="registrationStatus">Status</option>
-      <option value="confirmedBy">Confirmed By</option><option value="seatNo">Seat No</option>
-      <option value="timestamp">Registration Time</option>
-    </select>
-    <select id="participantSortDir" aria-label="Sort direction">
-      <option value="asc">A → Z / Low → High</option>
-      <option value="desc">Z → A / High → Low</option>
-    </select>
+   <div class="participantControls">
+    <div class="participantControlsTitle">↕ Sort &amp; Filter Participants</div>
+    <div class="participantControlGrid">
+     <label class="participantControl"><span>Sort by</span><select id="participantSort" aria-label="Sort participants">
+      <option value="default">Newest first (default)</option><option value="registrationNo">Registration No.</option><option value="seatNo">Seat No.</option><option value="name">Name</option><option value="age">Age</option><option value="gender">Gender</option><option value="city">Location</option><option value="mobile">Mobile</option><option value="language">Language</option><option value="paymentStatus">Payment</option><option value="registrationStatus">Registration Status</option><option value="confirmedBy">Confirmed By</option><option value="timestamp">Registration Time</option>
+     </select></label>
+     <label class="participantControl"><span>Direction</span><select id="participantSortDir" aria-label="Sort direction"><option value="asc">Ascending (A–Z)</option><option value="desc">Descending (Z–A)</option></select></label>
+     <label class="participantControl"><span>Registration status</span><select id="participantFilterStatus" aria-label="Filter by registration status"><option value="ALL">All statuses</option><option value="CONFIRMED">Confirmed</option><option value="INCOMPLETE">Pending / Incomplete</option><option value="CANCELLED">Cancelled</option></select></label>
+     <label class="participantControl"><span>Gender</span><select id="participantFilterGender" aria-label="Filter by gender"><option value="ALL">All genders</option><option value="Male">Male</option><option value="Female">Female</option></select></label>
+     <label class="participantControl"><span>Location</span><select id="participantFilterCity" aria-label="Filter by location"><option value="ALL">All locations</option><option value="Solapur">Solapur</option><option value="Outside Solapur">Outside Solapur</option></select></label>
+     <label class="participantControl"><span>Language</span><select id="participantFilterLanguage" aria-label="Filter by language"><option value="ALL">All languages</option><option value="Urdu">Urdu</option><option value="Hindi">Hindi</option><option value="English">English</option></select></label>
+     <label class="participantControl"><span>Payment</span><select id="participantFilterPayment" aria-label="Filter by payment status"><option value="ALL">All payments</option><option value="PAID">Paid / Confirmed</option><option value="PENDING">Pending / Not paid</option><option value="FAILED">Failed / Rejected</option></select></label>
+    </div>
+    <div class="participantFilterFooter"><span id="participantResultCount" aria-live="polite">Showing participants</span><button type="button" class="selectBtn" id="clearParticipantFilters">Reset filters</button></div>
    </div>
    <div class="tableWrap"><table class="tblParticipants"><thead><tr><th class="pickHead"><input type="checkbox" id="bulkSelectAllTable" data-action="bulkSelectAll" title="Select all visible"></th><th>Reg No</th><th>Seat No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Confirmed By</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
   </div>
@@ -1791,8 +2175,22 @@ function renderAdmin() {
   if ($('participantSort')) $('participantSort').value = state.participantSort || 'default';
   if ($('participantSortDir')) $('participantSortDir').value = state.participantSortDir || 'asc';
   const q = $('adminSearch').value.toLowerCase().trim();
-  const filtered = q ? state.rows.filter(r => [r.registrationNo, r.seatNo, r.name, r.mobile, r.city, r.language, r.registrationStatus, r.gender, r.paymentStatus, r.confirmedBy].join(' ').toLowerCase().includes(q)) : state.rows;
+  const filterStatus = $('participantFilterStatus') ? $('participantFilterStatus').value : 'ALL';
+  const filterGender = $('participantFilterGender') ? $('participantFilterGender').value : 'ALL';
+  const filterCity = $('participantFilterCity') ? $('participantFilterCity').value : 'ALL';
+  const filterLanguage = $('participantFilterLanguage') ? $('participantFilterLanguage').value : 'ALL';
+  const filterPayment = $('participantFilterPayment') ? $('participantFilterPayment').value : 'ALL';
+  let filtered = q ? state.rows.filter(r => [r.registrationNo, r.seatNo, r.name, r.mobile, r.city, r.language, r.registrationStatus, r.gender, r.paymentStatus, r.confirmedBy].join(' ').toLowerCase().includes(q)) : state.rows.slice();
+  if (filterStatus !== 'ALL') filtered = filtered.filter(r => String(r.registrationStatus || '').toUpperCase() === filterStatus);
+  if (filterGender !== 'ALL') filtered = filtered.filter(r => String(r.gender || '').toLowerCase() === filterGender.toLowerCase());
+  if (filterCity !== 'ALL') filtered = filtered.filter(r => String(r.city || '').toLowerCase() === filterCity.toLowerCase());
+  if (filterLanguage !== 'ALL') filtered = filtered.filter(r => String(r.language || '').toLowerCase() === filterLanguage.toLowerCase());
+  if (filterPayment === 'PAID') filtered = filtered.filter(r => /CONFIRMED|PAID|RECEIVED|SUCCESS/i.test(String(r.paymentStatus || '')));
+  else if (filterPayment === 'PENDING') filtered = filtered.filter(r => !/CONFIRMED|PAID|RECEIVED|SUCCESS|CANCEL|FAIL|REJECT/i.test(String(r.paymentStatus || '')));
+  else if (filterPayment === 'FAILED') filtered = filtered.filter(r => /CANCEL|FAIL|REJECT/i.test(String(r.paymentStatus || '')));
   const rows = sortParticipantRows(filtered);
+  const countEl = $('participantResultCount');
+  if (countEl) countEl.textContent = 'Showing ' + rows.length + ' of ' + state.rows.length + ' participants';
   $('adminRows').innerHTML = rows.map(r => {
     const st = String(r.registrationStatus || '').toUpperCase();
     const sel = ['CONFIRMED','INCOMPLETE','CANCELLED'].map(o => '<option' + (o === st ? ' selected' : '') + '>' + o + '</option>').join('');
@@ -1968,6 +2366,8 @@ $('shot').addEventListener('change', onShotChange);
 $('adminSearch').addEventListener('input', renderAdmin);
 $('participantSort').addEventListener('change', e => { state.participantSort = e.target.value; renderAdmin(); });
 $('participantSortDir').addEventListener('change', e => { state.participantSortDir = e.target.value; renderAdmin(); });
+['participantFilterStatus','participantFilterGender','participantFilterCity','participantFilterLanguage','participantFilterPayment'].forEach(id => $(id).addEventListener('change', renderAdmin));
+$('clearParticipantFilters').addEventListener('click', () => { ['participantFilterStatus','participantFilterGender','participantFilterCity','participantFilterLanguage','participantFilterPayment'].forEach(id => { $(id).value='ALL'; }); $('adminSearch').value=''; $('participantSort').value='default'; $('participantSortDir').value='asc'; state.participantSort='default'; state.participantSortDir='asc'; renderAdmin(); });
 $('adminRows').addEventListener('change', e => {
   if (e.target.classList.contains('statusSel')) onStatusChange(e.target);
   if (e.target.classList.contains('pickRow')) bulkToggleRow(e.target);
