@@ -1181,6 +1181,108 @@ body{letter-spacing:.005em}
   #adminCard .tblParticipants th:nth-child(10),#adminCard .tblParticipants td:nth-child(10),#adminCard .tblParticipants td:nth-child(10) * {font-size:9px !important;font-weight:400 !important}
 }
 
+
+
+/* MOBILE PARTICIPANT TABLE — compact, full-width, presentation-only.
+   Keeps selection, registration number, seat number, name, payment, status and actions.
+   Hides secondary details on phones to avoid horizontal scrolling and fit more rows. */
+@media (max-width: 599px) {
+  #adminCard .tableWrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 72vh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px !important;
+    margin-top: 8px !important;
+  }
+  #adminCard table.tblParticipants {
+    width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    border-spacing: 0 !important;
+  }
+  #adminCard .tblParticipants th,
+  #adminCard .tblParticipants td {
+    padding: 5px 3px !important;
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    vertical-align: middle !important;
+  }
+  #adminCard .tblParticipants th {
+    position: sticky !important;
+    top: 0 !important;
+    left: auto !important;
+    z-index: 20 !important;
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+    padding: 7px 2px !important;
+    text-align: center !important;
+  }
+
+  /* Keep only the columns needed for quick check-in/admin updates. */
+  #adminCard .tblParticipants th:nth-child(5),
+  #adminCard .tblParticipants td:nth-child(5),
+  #adminCard .tblParticipants th:nth-child(6),
+  #adminCard .tblParticipants td:nth-child(6),
+  #adminCard .tblParticipants th:nth-child(7),
+  #adminCard .tblParticipants td:nth-child(7),
+  #adminCard .tblParticipants th:nth-child(8),
+  #adminCard .tblParticipants td:nth-child(8),
+  #adminCard .tblParticipants th:nth-child(9),
+  #adminCard .tblParticipants td:nth-child(9),
+  #adminCard .tblParticipants th:nth-child(12),
+  #adminCard .tblParticipants td:nth-child(12),
+  #adminCard .tblParticipants th:nth-child(13),
+  #adminCard .tblParticipants td:nth-child(13) {
+    display: none !important;
+  }
+
+  /* Column widths: checkbox, registration, seat, name, payment, status, action. */
+  #adminCard .tblParticipants th:nth-child(1),
+  #adminCard .tblParticipants td:nth-child(1) { width: 8% !important; min-width: 0 !important; max-width: none !important; text-align:center !important; }
+  #adminCard .tblParticipants th:nth-child(2),
+  #adminCard .tblParticipants td:nth-child(2) { width: 17% !important; min-width: 0 !important; max-width: none !important; font-size: 9px !important; }
+  #adminCard .tblParticipants th:nth-child(3),
+  #adminCard .tblParticipants td:nth-child(3) { width: 12% !important; min-width: 0 !important; max-width: none !important; text-align:center !important; }
+  #adminCard .tblParticipants th:nth-child(4),
+  #adminCard .tblParticipants td:nth-child(4) {
+    width: 24% !important; min-width: 0 !important; max-width: none !important;
+    position: static !important; left: auto !important; z-index: auto !important;
+    box-shadow: none !important; text-align:left !important;
+    overflow-wrap:anywhere !important; font-size:10px !important;
+  }
+  #adminCard .tblParticipants th:nth-child(10),
+  #adminCard .tblParticipants td:nth-child(10) { width: 15% !important; min-width: 0 !important; max-width: none !important; text-align:center !important; }
+  #adminCard .tblParticipants th:nth-child(11),
+  #adminCard .tblParticipants td:nth-child(11) { width: 14% !important; min-width: 0 !important; max-width: none !important; text-align:center !important; }
+  #adminCard .tblParticipants th:nth-child(14),
+  #adminCard .tblParticipants td:nth-child(14) { width: 10% !important; min-width: 0 !important; max-width: none !important; text-align:center !important; }
+
+  #adminCard .tblParticipants td:nth-child(2) { font-weight:800 !important; }
+  #adminCard .tblParticipants td:nth-child(3) .seatNoCell { min-width:0 !important; font-size:9px !important; white-space:normal !important; }
+  #adminCard .tblParticipants td:nth-child(10) .pill {
+    display:inline-block !important; padding:2px 3px !important; font-size:8px !important;
+    line-height:1.1 !important; max-width:100% !important; overflow-wrap:anywhere !important;
+  }
+  #adminCard .tblParticipants td select.statusSel {
+    display:block !important; width:100% !important; max-width:100% !important;
+    min-height:28px !important; height:auto !important; padding:3px 1px !important;
+    font-size:8.5px !important; line-height:1.1 !important; white-space:normal !important;
+  }
+  #adminCard .tblParticipants .waAction {
+    display:block !important; width:100% !important; min-width:0 !important;
+    margin:1px 0 !important; padding:4px 1px !important;
+    font-size:8px !important; line-height:1.1 !important; white-space:normal !important;
+    overflow-wrap:anywhere !important;
+  }
+  #adminCard .tblParticipants .pickRow { width:15px !important; height:15px !important; }
+  #adminCard .tblParticipants tbody tr:nth-child(even) td { background:#f8fbf9 !important; }
+  #adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(4) { background:#f8fbf9 !important; }
+}
 </style>
 </head>
 <body>
@@ -1427,7 +1529,7 @@ JazakAllahu Khairan.</textarea>
       <option value="default">Newest first (default)</option><option value="registrationNo">Registration No.</option><option value="seatNo">Seat No.</option><option value="name">Name</option><option value="age">Age</option><option value="gender">Gender</option><option value="city">Location</option><option value="mobile">Mobile</option><option value="language">Language</option><option value="paymentStatus">Payment</option><option value="registrationStatus">Registration Status</option><option value="confirmedBy">Confirmed By</option><option value="timestamp">Registration Time</option>
      </select></label>
      <label class="participantControl"><span>Direction</span><select id="participantSortDir" aria-label="Sort direction"><option value="asc">Ascending (A–Z)</option><option value="desc">Descending (Z–A)</option></select></label>
-     <label class="participantControl"><span>Registration status</span><select id="participantFilterStatus" aria-label="Filter by registration status"><option value="ALL">All statuses</option><option value="CONFIRMED">Confirmed</option><option value="INCOMPLETE">Pending / Incomplete</option><option value="CANCELLED">Cancelled</option></select></label>
+     <label class="participantControl"><span>Registration status</span><select id="participantFilterStatus" aria-label="Filter by registration status"><option value="ALL">All statuses</option><option value="CONFIRMED">Confirmed</option><option value="CONFIRMED_CASH_PENDING">Cash pending</option><option value="INCOMPLETE">Pending / Incomplete</option><option value="CANCELLED">Cancelled</option></select></label>
      <label class="participantControl"><span>Gender</span><select id="participantFilterGender" aria-label="Filter by gender"><option value="ALL">All genders</option><option value="Male">Male</option><option value="Female">Female</option></select></label>
      <label class="participantControl"><span>Location</span><select id="participantFilterCity" aria-label="Filter by location"><option value="ALL">All locations</option><option value="Solapur">Solapur</option><option value="Outside Solapur">Outside Solapur</option></select></label>
      <label class="participantControl"><span>Language</span><select id="participantFilterLanguage" aria-label="Filter by language"><option value="ALL">All languages</option><option value="Urdu">Urdu</option><option value="Hindi">Hindi</option><option value="English">English</option></select></label>
@@ -2006,6 +2108,22 @@ function manualLogout() {
   showScreen('registerCard', 1);
 }
 
+function paymentStatusLabel(value) {
+  const raw = String(value == null ? '' : value).trim();
+  const key = raw.toUpperCase();
+  const labels = {
+    AWAITING_SCREENSHOT: 'Awaiting screenshot',
+    PAYMENT_SCREENSHOT_RECEIVED: 'PAYMENT_SCREENSHOT_RECEIVED',
+    CASH_PENDING: 'Cash pending',
+    CASH_RECEIVED: 'Cash received',
+    PAID: 'Paid',
+    PAYMENT_RECEIVED: 'Payment received',
+    DONE: 'Done',
+    PENDING: 'Pending'
+  };
+  return labels[key] || raw || '—';
+}
+
 function localStats() {
   const eq = (a, b) => String(a || '').trim().toLowerCase() === b;
   const n = (k, v) => state.rows.filter(r => eq(r[k], v)).length;
@@ -2193,10 +2311,11 @@ function renderAdmin() {
   if (countEl) countEl.textContent = 'Showing ' + rows.length + ' of ' + state.rows.length + ' participants';
   $('adminRows').innerHTML = rows.map(r => {
     const st = String(r.registrationStatus || '').toUpperCase();
-    const sel = ['CONFIRMED','INCOMPLETE','CANCELLED'].map(o => '<option' + (o === st ? ' selected' : '') + '>' + o + '</option>').join('');
+    const statusOptions = [['CONFIRMED','CONFIRMED'],['CONFIRMED_CASH_PENDING','Cash pending'],['INCOMPLETE','INCOMPLETE'],['CANCELLED','CANCELLED']];
+    const sel = statusOptions.map(([value, label]) => '<option value="' + value + '"' + (value === st ? ' selected' : '') + '>' + label + '</option>').join('');
     const u = safeUrl(r.screenshotUrl);
     return '<tr><td class="pickCell"><input type="checkbox" class="pickRow" data-reg="' + esc(r.registrationNo) + '"' + (state.bulkSelected.has(String(r.registrationNo)) ? ' checked' : '') + ' aria-label="Select ' + esc(r.registrationNo) + '"></td><td>' + esc(r.registrationNo) + '</td><td><b class="seatNoCell">' + esc(r.seatNo || '—') + '</b></td><td>' + esc(r.name) + '</td><td>' + esc(r.age) + '</td><td><span class="pill ' + (String(r.gender).toLowerCase() === 'female' ? 'female' : 'male') + '">' + esc(r.gender) + '</span>' +
-      '</td><td>' + esc(r.city) + '</td><td>' + esc(r.mobile) + '</td><td>' + esc(r.language) + '</td><td><span class="pill ' + (/CONFIRMED|PAID|RECEIVED|SUCCESS/i.test(String(r.paymentStatus)) ? 'ok' : /CANCEL|FAIL|REJECT/i.test(String(r.paymentStatus)) ? 'bad' : 'warn') + '">' + esc(r.paymentStatus) + '</span>' +
+      '</td><td>' + esc(r.city) + '</td><td>' + esc(r.mobile) + '</td><td>' + esc(r.language) + '</td><td><span class="pill ' + (/CONFIRMED|PAID|RECEIVED|SUCCESS/i.test(String(r.paymentStatus)) ? 'ok' : /CANCEL|FAIL|REJECT/i.test(String(r.paymentStatus)) ? 'bad' : 'warn') + '">' + esc(paymentStatusLabel(r.paymentStatus)) + '</span>' +
       '</td><td><select class="statusSel" data-reg="' + esc(r.registrationNo) + '">' + sel + '</select></td><td>' +
       (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">Open</a>' : '-') + '</td><td>' +
       (r.confirmedBy ? esc(r.confirmedBy) + (r.confirmedAt ? '<div class="muted" style="font-size:10px">' + esc(formatDateTime(r.confirmedAt)) + '</div>' : '') : '-') + '</td><td>' +
@@ -2223,9 +2342,9 @@ async function onStatusChange(sel) {
 }
 function exportCsv() {
   const cols = [['Reg No','registrationNo'],['Seat No','seatNo'],['Timestamp','timestamp'],['Name','name'],['Age','age'],['Gender','gender'],['Location','city'],
-    ['Mobile','mobile'],['Language','language'],['Payment Status','paymentStatus'],['Registration Status','registrationStatus'],['Screenshot','screenshotUrl'],['Admin Note','adminNote']];
+    ['Mobile','mobile'],['Language','language'],['Payment Status','paymentStatusLabel'],['Registration Status','registrationStatus'],['Screenshot','screenshotUrl'],['Admin Note','adminNote']];
   const cell = v => { v = String(v == null ? '' : v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
-  const csv = '\ufeff' + [cols.map(c => cell(c[0])).join(',')].concat(state.rows.map(r => cols.map(c => cell(r[c[1]])).join(','))).join('\r\n');
+  const csv = '\ufeff' + [cols.map(c => cell(c[0])).join(',')].concat(state.rows.map(r => cols.map(c => cell(c[1] === 'paymentStatusLabel' ? paymentStatusLabel(r.paymentStatus) : r[c[1]])).join(','))).join('\r\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
   a.download = 'workshop_registrations_' + new Date().toISOString().slice(0, 10) + '.csv';
