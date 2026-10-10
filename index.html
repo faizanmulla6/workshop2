@@ -172,7 +172,7 @@ a.btnlink.map{background:#e8f0fe;color:#1a4fa3}
 .posterText span{font-size:12.5px;color:var(--muted)}
 
 /* ============================= BOTTOM NAV ============================= */
-.bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom));width:min(92vw,420px);z-index:30;display:grid;grid-template-columns:repeat(2,1fr);gap:4px;padding:6px;background:rgba(6,63,69,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:18px;border:1px solid rgba(216,173,72,.4);box-shadow:0 12px 32px rgba(0,0,0,.28)}
+.bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom));width:min(92vw,420px);z-index:30;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:6px;background:rgba(6,63,69,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:18px;border:1px solid rgba(216,173,72,.4);box-shadow:0 12px 32px rgba(0,0,0,.28)}
 .bottom button{background:transparent;color:#cde0df;font-size:11px;font-weight:800;padding:8px 4px;border-radius:13px;line-height:1.3;transition:background .2s}
 .bottom button.active{background:rgba(255,255,255,.15);color:#fff}
 
@@ -246,6 +246,16 @@ td .error{margin:0;font-size:inherit}
 .manualGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .manualGrid .field{margin-top:10px}
 .manualResult{margin-top:10px;padding:11px 12px;border-radius:11px;background:#effaf3;border:1px solid #bfe3cc;color:#17633f;font-size:13px;font-weight:800}
+.lookupResults{display:grid;gap:10px;margin-top:14px}
+.lookupParticipant{border:1px solid #d7e4e0;border-radius:14px;background:#fbfdfc;padding:13px}
+.lookupParticipantHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.lookupParticipantName{font-size:15px;font-weight:850;color:var(--teal-900);overflow-wrap:anywhere}
+.lookupParticipantMeta{font-size:12px;color:var(--muted);line-height:1.6;margin-top:5px}
+.lookupParticipant .primary{margin-top:10px;width:100%}
+.lookupStatus{display:inline-block;font-size:10px;font-weight:900;border-radius:99px;padding:4px 8px;background:#edf3f1;color:#405650;white-space:nowrap}
+.lookupStatus.confirmed{background:#e3f7eb;color:#17633f}.lookupStatus.cancelled{background:#fff0f0;color:#a92e2e}
+.lookupEmpty{padding:13px;border:1px dashed #c9d8d3;border-radius:12px;color:var(--muted);font-size:13px}
+
 
 /* ================================ FOOTER ============================== */
 .footer{margin-top:30px;padding:26px 16px 118px;text-align:center;color:#cfe0e0;background:linear-gradient(158deg,#052f34,#063f45);border-top:3px solid var(--gold);font-size:12px;line-height:1.7}
@@ -385,6 +395,12 @@ td .error{margin:0;font-size:inherit}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 .seatBadge{margin:2px 0 2px}
+
+.seatNumberBanner{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px auto 12px;padding:10px 18px;width:min(100%,260px);border:1.5px solid var(--gold);border-radius:14px;background:linear-gradient(135deg,#f8edc9,#fffaf0);box-shadow:0 4px 14px rgba(185,138,44,.14)}
+.seatNumberBanner span{font-size:10px;letter-spacing:1.5px;font-weight:900;color:#725316}
+.seatNumberBanner strong{font-size:30px;line-height:1.1;font-weight:950;letter-spacing:1px;color:var(--teal-800)}
+.seatNoCell{display:inline-block;min-width:58px;color:#684d12;font-weight:900;white-space:nowrap}.lookupSeatPending{font-size:12px;color:#7b6b47;font-weight:700;margin:7px 0}.seatNoMini{display:inline-block;margin-top:4px;padding:3px 6px;border-radius:6px;background:#fff4d6;border:1px solid #ead28d;color:#684d12;font-size:10px;font-weight:900;white-space:nowrap}
+
 .regRight .card:not(.span2) .title{font-size:18px;line-height:1.25}
 .hidayaat li.must{align-items:center}
 .hidayaat li.must:before{margin-top:0}
@@ -403,26 +419,28 @@ td .error{margin:0;font-size:inherit}
 @media(min-width:1180px){
   #adminCard .tableWrap{overflow-x:hidden;overflow-y:auto}
   .tblParticipants{table-layout:fixed;width:100%;min-width:0}
-  .tblParticipants th,.tblParticipants td{white-space:normal;overflow-wrap:anywhere;word-break:normal;padding:9px 5px;font-size:12px;line-height:1.35;vertical-align:middle}
-  .tblParticipants th{font-size:10px;letter-spacing:0;line-height:1.25;overflow-wrap:normal}
-  .tblParticipants th:nth-child(1){width:3.2%}
-  .tblParticipants th:nth-child(2){width:9%}
-  .tblParticipants th:nth-child(3){width:10%}
-  .tblParticipants th:nth-child(4){width:3.4%}
-  .tblParticipants th:nth-child(5){width:5.2%}
-  .tblParticipants th:nth-child(6){width:7.6%}
-  .tblParticipants th:nth-child(7){width:8.4%}
-  .tblParticipants th:nth-child(8){width:6%}
-  .tblParticipants th:nth-child(9){width:13.2%}
-  .tblParticipants th:nth-child(10){width:10%}
-  .tblParticipants th:nth-child(11){width:7.6%}
-  .tblParticipants th:nth-child(12){width:8%}
-  .tblParticipants th:nth-child(13){width:8.4%}
+  .tblParticipants th,.tblParticipants td{white-space:normal;overflow-wrap:anywhere;word-break:normal;padding:8px 5px;font-size:12px;line-height:1.3;vertical-align:middle}
+  .tblParticipants th{font-size:10px;letter-spacing:0;line-height:1.2;overflow-wrap:normal}
+  /* Column order: Select, Reg No, Seat No, Name, Age, Gender, City, Mobile, Language, Payment, Status, Screenshot, Confirmed By, Action */
+  .tblParticipants th:nth-child(1),.tblParticipants td:nth-child(1){width:2%;text-align:center}
+  .tblParticipants th:nth-child(2),.tblParticipants td:nth-child(2){width:8%;white-space:nowrap;overflow-wrap:normal}
+  .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){width:4%;white-space:nowrap;overflow-wrap:normal}
+  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){width:13%;overflow-wrap:anywhere}
+  .tblParticipants th:nth-child(5),.tblParticipants td:nth-child(5){width:4%;text-align:center}
+  .tblParticipants th:nth-child(6),.tblParticipants td:nth-child(6){width:6%}
+  .tblParticipants th:nth-child(7),.tblParticipants td:nth-child(7){width:8%}
+  .tblParticipants th:nth-child(8),.tblParticipants td:nth-child(8){width:9%;white-space:nowrap;overflow-wrap:normal}
+  .tblParticipants th:nth-child(9),.tblParticipants td:nth-child(9){width:6%;font-size:11px;letter-spacing:0}
+  .tblParticipants th:nth-child(10),.tblParticipants td:nth-child(10){width:7%}
+  .tblParticipants th:nth-child(11),.tblParticipants td:nth-child(11){width:8%}
+  .tblParticipants th:nth-child(12),.tblParticipants td:nth-child(12){width:5%}
+  .tblParticipants th:nth-child(13),.tblParticipants td:nth-child(13){width:7%}
+  .tblParticipants th:nth-child(14),.tblParticipants td:nth-child(14){width:9%}
   .tblParticipants td:nth-child(2){font-weight:800;color:var(--teal-800);font-size:11px;white-space:nowrap;overflow-wrap:normal}
-  .tblParticipants td:nth-child(9){font-size:10px;letter-spacing:0}
+  .tblParticipants td:nth-child(3) .seatNoCell{min-width:0;font-size:11px}
   .tblParticipants td select{width:100%;font-size:11px;padding:5px 2px}
   .tblParticipants .waAction{display:block;width:100%;margin:2px 0;padding:7px 3px;font-size:10px;letter-spacing:0}
-  .tblParticipants .muted{font-size:10px!important}
+  .tblParticipants .muted{font-size:9px!important}
 }
 
 
@@ -438,8 +456,8 @@ td .error{margin:0;font-size:inherit}
     scrollbar-width:thin;
   }
   .tblParticipants{
-    min-width:1080px;
-    width:1080px;
+    min-width:1218px;
+    width:1218px;
     border-collapse:separate;
     border-spacing:0;
     table-layout:auto;
@@ -452,26 +470,27 @@ td .error{margin:0;font-size:inherit}
   }
   .tblParticipants th{font-size:9.5px;padding:8px 7px}
   .tblParticipants th:nth-child(1),.tblParticipants td:nth-child(1){width:34px;min-width:34px;max-width:34px;text-align:center}
-  .tblParticipants th:nth-child(2),.tblParticipants td:nth-child(2){width:78px;min-width:78px;max-width:78px}
-  .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){width:125px;min-width:125px;max-width:125px}
-  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){width:45px;min-width:45px}
-  .tblParticipants th:nth-child(5),.tblParticipants td:nth-child(5){width:65px;min-width:65px}
-  .tblParticipants th:nth-child(6),.tblParticipants td:nth-child(6){width:90px;min-width:90px}
-  .tblParticipants th:nth-child(7),.tblParticipants td:nth-child(7){width:105px;min-width:105px}
-  .tblParticipants th:nth-child(8),.tblParticipants td:nth-child(8){width:75px;min-width:75px}
-  .tblParticipants th:nth-child(9),.tblParticipants td:nth-child(9){width:130px;min-width:130px}
-  .tblParticipants th:nth-child(10),.tblParticipants td:nth-child(10){width:105px;min-width:105px}
-  .tblParticipants th:nth-child(11),.tblParticipants td:nth-child(11){width:72px;min-width:72px}
-  .tblParticipants th:nth-child(12),.tblParticipants td:nth-child(12){width:100px;min-width:100px}
-  .tblParticipants th:nth-child(13),.tblParticipants td:nth-child(13){width:155px;min-width:155px}
+  .tblParticipants th:nth-child(2),.tblParticipants td:nth-child(2){width:90px;min-width:90px;max-width:90px}
+  .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){width:72px;min-width:72px;max-width:72px}
+  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){width:145px;min-width:145px;max-width:145px}
+  .tblParticipants th:nth-child(5),.tblParticipants td:nth-child(5){width:45px;min-width:45px;max-width:45px}
+  .tblParticipants th:nth-child(6),.tblParticipants td:nth-child(6){width:72px;min-width:72px;max-width:72px}
+  .tblParticipants th:nth-child(7),.tblParticipants td:nth-child(7){width:90px;min-width:90px;max-width:90px}
+  .tblParticipants th:nth-child(8),.tblParticipants td:nth-child(8){width:100px;min-width:100px;max-width:100px}
+  .tblParticipants th:nth-child(9),.tblParticipants td:nth-child(9){width:75px;min-width:75px;max-width:75px}
+  .tblParticipants th:nth-child(10),.tblParticipants td:nth-child(10){width:90px;min-width:90px;max-width:90px}
+  .tblParticipants th:nth-child(11),.tblParticipants td:nth-child(11){width:95px;min-width:95px;max-width:95px}
+  .tblParticipants th:nth-child(12),.tblParticipants td:nth-child(12){width:75px;min-width:75px;max-width:75px}
+  .tblParticipants th:nth-child(13),.tblParticipants td:nth-child(13){width:125px;min-width:125px;max-width:125px}
+  .tblParticipants th:nth-child(14),.tblParticipants td:nth-child(14){width:110px;min-width:110px;max-width:110px}
 
   /* Freeze ONLY the Name column so the participant identity remains visible while scrolling. */
-  .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){
-    position:sticky;left:0;z-index:6;background:#fff;
+  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){
+    position:sticky;left:196px;z-index:6;background:#fff;
     box-shadow:3px 0 5px rgba(6,63,69,.10);
   }
-  .tblParticipants th:nth-child(3){background:var(--teal-800);color:#fff;z-index:9}
-  .tblParticipants tbody tr:nth-child(even) td:nth-child(3){background:#fafcfb}
+  .tblParticipants th:nth-child(4){background:var(--teal-800);color:#fff;z-index:9}
+  .tblParticipants tbody tr:nth-child(even) td:nth-child(4){background:#fafcfb}
   .tblParticipants tbody tr:hover td:nth-child(3){background:#f0f7f3}
   .tblParticipants td:nth-child(2){font-weight:800;color:var(--teal-800)}
   .tblParticipants td:nth-child(3){font-weight:800;color:var(--ink);overflow:hidden;text-overflow:ellipsis}
@@ -499,6 +518,88 @@ td .error{margin:0;font-size:inherit}
 .youtubeLinks{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
 .youtubeLinks a{font-size:10px;font-weight:800;text-decoration:none;color:#8a211c;background:#fff;border:1px solid #edc4c1;border-radius:999px;padding:4px 7px}
 .youtubeLinks a:hover{background:#fff0ef}
+
+/* =====================================================================
+   UI POLISH v4 — presentation only (no logic changes)
+   ===================================================================== */
+:root{--r-lg:18px;--r-md:13px;--ring:0 0 0 3px rgba(216,173,72,.28)}
+body{letter-spacing:.005em}
+.card{border-radius:var(--r-lg);border:1px solid rgba(216,173,72,.28);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 2px 4px rgba(6,63,69,.04),0 14px 34px -12px rgba(6,63,69,.16);transition:box-shadow .25s,transform .25s}
+.cardHead .ico{background:linear-gradient(135deg,#fff6d8,#f6e2a4);border:1px solid #ead28d;box-shadow:0 2px 6px rgba(185,138,44,.18)}
+.title{letter-spacing:-.3px}
+.field input,.field select{border-radius:var(--r-md);background:#fff;border-color:#d3dfda;box-shadow:0 1px 2px rgba(6,63,69,.04)}
+.field input:focus,.field select:focus{border-color:var(--gold-600);box-shadow:var(--ring)}
+.primary{border-radius:var(--r-md);background:linear-gradient(135deg,var(--teal-800) 0%,var(--teal-700) 60%,#13808a 100%);box-shadow:0 10px 22px -8px rgba(6,63,69,.55),inset 0 1px 0 rgba(255,255,255,.18)}
+.primary:active{transform:translateY(1px) scale(.99)}
+.secondary{border-radius:var(--r-md);background:#f1f6f4;border:1px solid #d9e6e1}
+.info{border-radius:12px;background:linear-gradient(180deg,#fafcfb,#f2f6f4);border:1px solid #e1eae6}
+.info small{color:#7a8c90}
+.notice{border-radius:13px;box-shadow:0 1px 3px rgba(185,138,44,.10)}
+.step{border-radius:12px}
+.step.active{box-shadow:0 6px 14px -4px rgba(6,63,69,.4)}
+
+/* confirmation / seat */
+.confirm{border-radius:22px}
+.seatNumberBanner{border-radius:16px;background:linear-gradient(135deg,#fbefc8 0%,#fffaf0 55%,#f6e2a4 100%);box-shadow:0 8px 20px -8px rgba(185,138,44,.45),inset 0 1px 0 #fff}
+.seatNumberBanner strong{font-size:34px;text-shadow:0 1px 0 #fff}
+
+/* participant details (My Registration) */
+.lookupParticipant{position:relative;border:1px solid #d9e6e1;border-radius:16px;background:#fff;padding:14px 14px 12px;box-shadow:0 8px 22px -14px rgba(6,63,69,.28);overflow:hidden}
+.lookupParticipant:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--gold),var(--gold-600))}
+.lookupParticipantName{font-size:16px;font-weight:900;color:var(--teal-800)}
+.lookupParticipantMeta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:11.5px;color:#4b5f63}
+.lookupStatus{padding:5px 10px;border:1px solid #d6e2de;letter-spacing:.4px}
+.lookupStatus.confirmed{border-color:#bfe3cc}.lookupStatus.cancelled{border-color:#f3c9c9}
+.lookupResults{gap:12px}
+
+/* ---------- participants table (admin) ---------- */
+#adminCard .tableWrap{border-radius:16px;border:1px solid #d9e6e1;box-shadow:0 10px 26px -16px rgba(6,63,69,.35);background:#fff}
+.tblParticipants,.tblAdmins{border-collapse:separate;border-spacing:0}
+.tblParticipants th,.tblAdmins th{background:linear-gradient(180deg,#0a5159,#063f45);color:#fff;text-transform:uppercase;font-size:10.5px;letter-spacing:.7px;font-weight:800;border-bottom:3px solid var(--gold);padding:11px 10px}
+.tblParticipants td,.tblAdmins td{border-bottom:1px solid #edf2ef;padding:10px;color:#22393f;vertical-align:middle}
+.tblParticipants tbody tr:nth-child(even) td,.tblAdmins tbody tr:nth-child(even) td{background:#f9fbfa}
+.tblParticipants tbody tr:hover td,.tblAdmins tbody tr:hover td{background:#fff8e3}
+.tblParticipants td:nth-child(4){font-weight:800;color:var(--teal-900)}
+.tblParticipants td a{color:#0f6b73;font-weight:800;text-decoration:none;border-bottom:1px dashed #0f6b73}
+.tblParticipants td select{border-radius:9px;border:1.5px solid #cfdcd7;font-weight:800;background:#fff}
+.tblParticipants .waAction{border-radius:9px;box-shadow:0 3px 8px -3px rgba(7,94,84,.5)}
+.pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.4px;white-space:nowrap;background:#eef3f1;color:#405650;border:1px solid #dbe5e1}
+.pill.ok{background:#e3f7eb;color:#17633f;border-color:#bfe3cc}
+.pill.warn{background:#fff4d6;color:#7a5600;border-color:#ecd48a}
+.pill.bad{background:#fff0f0;color:#a92e2e;border-color:#f3c9c9}
+.pill.male{background:#e8f0fe;color:#1a4fa3;border-color:#c6d8f8}
+.pill.female{background:#fdeaf4;color:#a1306f;border-color:#f3c4de}
+.stat{border-radius:14px;box-shadow:0 6px 16px -10px rgba(6,63,69,.3)}
+.stat b{font-size:26px}
+.genderCard{border-radius:14px;box-shadow:0 6px 16px -12px rgba(6,63,69,.3)}
+@media(max-width:599px){
+  .tblParticipants th{font-size:9.5px;padding:9px 7px}
+  .card{border-radius:16px}
+}
+
+/* ---- fix: overlapping Payment badge / Status dropdown on desktop ---- */
+.tblParticipants td{overflow:hidden}
+.tblParticipants .pill{white-space:normal;overflow-wrap:anywhere;word-break:break-word;line-height:1.25;max-width:100%;text-align:center}
+@media(min-width:1180px){
+  .tblParticipants th:nth-child(1),.tblParticipants td:nth-child(1){width:3%}
+  .tblParticipants th:nth-child(2),.tblParticipants td:nth-child(2){width:7%}
+  .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){width:5%}
+  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){width:11%}
+  .tblParticipants th:nth-child(5),.tblParticipants td:nth-child(5){width:4%}
+  .tblParticipants th:nth-child(6),.tblParticipants td:nth-child(6){width:6%}
+  .tblParticipants th:nth-child(7),.tblParticipants td:nth-child(7){width:7%}
+  .tblParticipants th:nth-child(8),.tblParticipants td:nth-child(8){width:8%}
+  .tblParticipants th:nth-child(9),.tblParticipants td:nth-child(9){width:7%}
+  .tblParticipants th:nth-child(10),.tblParticipants td:nth-child(10){width:12%}
+  .tblParticipants th:nth-child(11),.tblParticipants td:nth-child(11){width:10%}
+  .tblParticipants th:nth-child(12),.tblParticipants td:nth-child(12){width:6%}
+  .tblParticipants th:nth-child(13),.tblParticipants td:nth-child(13){width:7%}
+  .tblParticipants th:nth-child(14),.tblParticipants td:nth-child(14){width:7%}
+  .tblParticipants th{font-size:9.5px;padding:10px 6px;overflow-wrap:normal;hyphens:none}
+  .tblParticipants td{padding:9px 6px}
+  .tblParticipants .pill{font-size:9px;padding:3px 7px}
+  .tblParticipants td select{min-width:0;font-size:10.5px;padding:5px 2px}
+}
 </style>
 </head>
 <body>
@@ -658,13 +759,14 @@ td .error{margin:0;font-size:inherit}
  </div>
 </section>
 
-<!-- ============ LOOKUP ============ -->
+<!-- ============ MY REGISTRATION ============ -->
 <section id="lookupCard" class="screen">
- <div class="card"><div class="title">My Registration</div><div class="sub">Find your confirmation using registration number + mobile.</div>
-  <div class="field"><label for="lookupNo">REGISTRATION NUMBER</label><input id="lookupNo" autocapitalize="characters" placeholder="TRW-000001"></div>
-  <div class="field"><label for="lookupMob">MOBILE NUMBER</label><input id="lookupMob" type="tel" inputmode="numeric" maxlength="14" placeholder="10-digit mobile"></div>
+ <div class="card"><div class="title">My Registration</div><div class="sub">Enter the mobile number used during registration. All participants registered with that number will be listed below.</div>
+  <div class="field"><label for="lookupMob">MOBILE NUMBER</label><input id="lookupMob" type="tel" inputmode="numeric" maxlength="14" autocomplete="tel" placeholder="Enter 10-digit mobile number"></div>
   <div id="lookupError" class="error" role="alert"></div>
-  <button type="button" class="primary" id="lookupBtn" data-action="doLookup">Find Registration</button>
+  <button type="button" class="primary" id="lookupBtn" data-action="searchMyRegistrations">🔎 Search My Registrations</button>
+  <div id="lookupResults" class="lookupResults" aria-live="polite" hidden></div>
+  <div class="notice" style="margin-top:12px">For privacy, enter the mobile number that was provided during registration. Select the correct participant to view their registration details and seat number, if confirmed.</div>
  </div>
 </section>
 
@@ -714,8 +816,18 @@ td .error{margin:0;font-size:inherit}
      <div class="field"><label for="bulkLanguage">LANGUAGE</label><select id="bulkLanguage"><option value="ALL">All languages</option><option value="Urdu">Urdu</option><option value="Hindi">Hindi</option><option value="English">English</option></select></div>
      <div class="field"><label for="bulkDelay">DELAY BETWEEN MESSAGES</label><select id="bulkDelay"><option value="2">2 seconds</option><option value="3">3 seconds</option><option value="4">4 seconds</option><option value="5">5 seconds</option><option value="6">6 seconds</option><option value="7">7 seconds</option><option value="8" selected>8 seconds</option><option value="9">9 seconds</option><option value="10">10 seconds</option></select></div>
     </div>
-    <div class="field"><label for="bulkMessage">MESSAGE</label><textarea id="bulkMessage">Assalamu'alaikum warahmatullahi wabarakatuhu\n\nTAHAFFUZ-E-AQEEDAH WA MANHAJ\nEk Rozah Tarbiyati Workshop\n\nParticipant Name: {{name}}\nRegistration No.: {{registrationNo}}\n\nThis is an important workshop update. Kindly keep your registration details safely.\n\nJazakAllahu Khairan.</textarea>
-    <div class="bulkHint">Variables: <b>{{name}}</b>, <b>{{registrationNo}}</b>, <b>{{mobile}}</b>, <b>{{gender}}</b>, <b>{{city}}</b>, <b>{{language}}</b>. Tick individual participants below to send only to selected people. If none are ticked, the current search/filter is used.</div>
+    <div class="field"><label for="bulkMessage">MESSAGE</label><textarea id="bulkMessage">Assalamu'alaikum warahmatullahi wabarakatuhu
+
+TAHAFFUZ-E-AQEEDAH WA MANHAJ
+Ek Rozah Tarbiyati Workshop
+
+Participant Name: {{name}}
+Seat Number: {{seatNo}}
+
+Your seat number is important. Please keep it safely for the workshop.
+
+JazakAllahu Khairan.</textarea>
+    <div class="bulkHint">Variables: <b>{{name}}</b>, <b>{{seatNo}}</b>, <b>{{registrationNo}}</b> (optional), <b>{{mobile}}</b>, <b>{{gender}}</b>, <b>{{city}}</b>, <b>{{language}}</b>. For confirmed participants, {{seatNo}} inserts their assigned seat (e.g. M-001 / F-001). Pending participants may have no seat number yet. Tick individual participants below to send only to selected people. If none are ticked, the current search/filter is used.</div>
     <div class="bulkSelectBar">
       <label><input type="checkbox" id="bulkSelectAll" data-action="bulkSelectAll"> Select all visible</label>
       <button type="button" class="selectBtn" data-action="bulkClearSelection">✕ Clear selection</button>
@@ -740,7 +852,7 @@ td .error{margin:0;font-size:inherit}
       <option value="language">Language</option>
       <option value="paymentStatus">Payment</option>
       <option value="registrationStatus">Status</option>
-      <option value="confirmedBy">Confirmed By</option>
+      <option value="confirmedBy">Confirmed By</option><option value="seatNo">Seat No</option>
       <option value="timestamp">Registration Time</option>
     </select>
     <select id="participantSortDir" aria-label="Sort direction">
@@ -748,7 +860,7 @@ td .error{margin:0;font-size:inherit}
       <option value="desc">Z → A / High → Low</option>
     </select>
    </div>
-   <div class="tableWrap"><table class="tblParticipants"><thead><tr><th class="pickHead"><input type="checkbox" id="bulkSelectAllTable" data-action="bulkSelectAll" title="Select all visible"></th><th>Reg No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Confirmed By</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
+   <div class="tableWrap"><table class="tblParticipants"><thead><tr><th class="pickHead"><input type="checkbox" id="bulkSelectAllTable" data-action="bulkSelectAll" title="Select all visible"></th><th>Reg No</th><th>Seat No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Confirmed By</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
   </div>
  </div>
 </section>
@@ -799,6 +911,7 @@ Payment Status: Done"></textarea>
 
 <nav class="bottom">
  <button type="button" id="navReg" class="active" data-action="register">📝<br>Register</button>
+ <button type="button" id="navMyRegistration" data-action="lookup">🔎<br>My Registration</button>
  <button type="button" id="navManual" data-action="manual">📝<br>Manual</button>
 </nav>
 <div class="footer">
@@ -836,7 +949,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const digits10 = v => String(v || '').replace(/\D/g, '').slice(-10);
 const MOBILE_RE = /^[6-9]\d{9}$/;
-const state = { regBusy:false, regReq:0, regNo:'', mobile:'', name:'', gender:'', participant:null, pin:'', adminRole:'', adminId:null, adminName:'', rows:[], manualPin:'', shot:null, shotBusy:null, bulkSelected:new Set(), stage:'register', participantSort:'default', participantSortDir:'asc' };
+const state = { regBusy:false, regReq:0, regNo:'', mobile:'', name:'', gender:'', participant:null, pin:'', adminRole:'', adminId:null, adminName:'', rows:[], manualPin:'', shot:null, shotBusy:null, bulkSelected:new Set(), lookupParticipants:[], stage:'register', participantSort:'default', participantSortDir:'asc' };
 
 function store(v) { try { v ? localStorage.setItem(STORE_KEY, JSON.stringify(v)) : localStorage.removeItem(STORE_KEY); } catch (e) {} }
 function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { return null; } }
@@ -923,6 +1036,8 @@ async function call(fn, args) {
         return await rpc('choose_cash_payment', { p_reg: args[0], p_mobile: args[1] });
       case 'getRegistration':
         return await rpc('get_registration', { p_reg: args[0], p_mobile: args[1] });
+      case 'getRegistrationsByMobile':
+        return await rpc('get_registrations_by_mobile', { p_mobile: args[0] });
       case 'uploadPaymentScreenshot': {
         const reg = args[0], mobile = args[1], blob = dataUrlToBlob(args[2].data);
         const path = reg + '/' + uid() + '.jpg';
@@ -971,7 +1086,7 @@ async function call(fn, args) {
 }
 
 /* ============================== NAVIGATION ========================= */
-const NAV = { registerCard:'navReg', paymentCard:'navPay', confirmCard:'navLookup', lookupCard:'navLookup', adminCard:'navAdmin', manualCard:'navManual' };
+const NAV = { registerCard:'navReg', paymentCard:'navReg', confirmCard:'navMyRegistration', lookupCard:'navMyRegistration', adminCard:'navAdmin', manualCard:'navManual' };
 
 function steps(n) { ['st1','st2','st3'].forEach((x, i) => $(x).classList.toggle('active', i < n)); }
 function showScreen(id, step) {
@@ -982,7 +1097,7 @@ function showScreen(id, step) {
   const stepsEl = $('steps');
   if (stepsEl) stepsEl.hidden = !(id === 'registerCard' || id === 'paymentCard' || id === 'confirmCard');
   if (step) steps(step);
-  ['navReg','navManual'].forEach(x => { const el = $(x); if (el) el.classList.remove('active'); });
+  ['navReg','navMyRegistration','navManual'].forEach(x => { const el = $(x); if (el) el.classList.remove('active'); });
   const navId = NAV[id];
   const navEl = navId ? $(navId) : null;
   if (navEl) navEl.classList.add('active');
@@ -1200,16 +1315,17 @@ function renderConfirm(d) {
     : cash ? '<div style="font-weight:900;color:#a97a00">Pay ₹50 cash to the organisers</div>'
     : '<div style="font-weight:900;color:#a97a00">Payment screenshot not uploaded yet</div>';
   $('confirmation').innerHTML =
-   '<div style="text-align:center"><div class="muted">' + head + '</div><div class="reg">' + esc(d.registrationNo) + '</div>' + line + '</div>' +
+   '<div style="text-align:center"><div class="muted">' + head + '</div>' +
+   (ok && d.seatNo ? '<div class="seatNumberBanner"><span>YOUR SEAT NUMBER</span><strong>' + esc(d.seatNo) + '</strong></div>' : '<div class="seatNumberBanner"><span>SEAT NUMBER</span><strong style="font-size:16px">Assigned after confirmation</strong></div>') + line + '</div>' +
    '<div class="grid" style="margin-top:13px">' +
     info('NAME', d.name) + info('AGE', d.age) + info('GENDER', d.gender) + info('LANGUAGE', d.language) +
     info('LOCATION', d.city) + info('MOBILE', d.mobile) + '</div>' +
    '<hr style="border:0;border-top:1px solid #eadfae;margin:15px 0">' +
    '<div class="grid">' + info('VENUE', d.venue) + info('DATE', d.programDate) + info('REPORTING', d.reportingTime) + info('PROGRAM', d.programTime) + '</div>' +
-   (ok ? '<div class="notice"><b>Important:</b> Please save this confirmation or take a screenshot. Bring your registration number to the program.</div>' : '') +
-   (cash ? '<div class="notice"><b>How to pay cash:</b> contact the organisers on <b>70284 88819 / 99608 05017</b> and quote <b>' + esc(d.registrationNo) + '</b>. Your registration is confirmed once they receive ₹50. Keep this number safe.</div>' : '') +
+   (ok ? '<div class="notice"><b>Important:</b> Please save this confirmation or take a screenshot. Remember your seat number and show it at the program.</div>' : '') +
+   (cash ? '<div class="notice"><b>How to pay cash:</b> contact the organisers on <b>70284 88819 / 99608 05017</b> and provide the participant name and mobile number. Your registration is confirmed once they receive ₹50.</div>' : '') +
    '<a class="btnlink wa" data-noprint href="' + COMMUNITY_WHATSAPP + '" target="_blank" rel="noopener">💬 Join WhatsApp Community</a>' +
-   '<a class="btnlink wa wa-organiser" data-noprint href="https://wa.me/' + getWhatsappNumber(d.gender) + '?text=' + encodeURIComponent('Assalamualaikum, I need help regarding workshop registration\nName: ' + (d.name || '') + '\nRegistration: ' + d.registrationNo) + '" target="_blank" rel="noopener">📞 WhatsApp Organiser: ' + formatWhatsapp(getWhatsappNumber(d.gender)) + '</a>' +
+   '<a class="btnlink wa wa-organiser" data-noprint href="https://wa.me/' + getWhatsappNumber(d.gender) + '?text=' + encodeURIComponent('Assalamualaikum, I need help regarding workshop registration\nName: ' + (d.name || '') + '\nSeat No: ' + (d.seatNo || 'Not assigned yet')) + '" target="_blank" rel="noopener">📞 WhatsApp Organiser: ' + formatWhatsapp(getWhatsappNumber(d.gender)) + '</a>' +
    (!cancelled ? '<a class="btnlink map" data-noprint href="' + esc(MAP_URL) + '" target="_blank" rel="noopener">📍 Open Location in Google Maps</a>' : '') +
    (!ok && !cancelled ? '<button type="button" class="primary" data-noprint data-action="resumeFromConfirm">' + (cash ? 'Pay online instead →' : 'Complete Payment →') + '</button>' : '');
 }
@@ -1218,22 +1334,44 @@ function formatWhatsapp(number) { const n = String(number || '').replace(/^91/, 
 function safeGroup(u) { return typeof u === 'string' && u.indexOf('https://chat.whatsapp.com/') === 0; }
 function info(l, v) { return '<div class="info"><small>' + l + '</small><b>' + esc(v) + '</b></div>'; }
 
-async function doLookup() {
-  const n = $('lookupNo').value.trim().toUpperCase(), m = digits10($('lookupMob').value), err = $('lookupError');
-  err.textContent = '';
-  if (!n || !MOBILE_RE.test(m)) { err.textContent = 'Enter a valid registration number and mobile.'; return; }
+async function searchMyRegistrations() {
+  const m = digits10($('lookupMob').value), err = $('lookupError'), results = $('lookupResults');
+  err.textContent = ''; results.hidden = true; results.innerHTML = '';
+  if (!MOBILE_RE.test(m)) { err.textContent = 'Enter a valid 10-digit mobile number.'; return; }
   const btn = $('lookupBtn'), label = btn.textContent; btn.disabled = true; btn.textContent = 'Searching...';
   try {
-    const res = await call('getRegistration', [n, m]);
-    if (!res || res.ok === false) throw new Error((res && res.message) || 'Not found.');
-    state.participant = res; state.regNo = res.registrationNo; state.mobile = m; state.gender = res.gender || '';
-    renderConfirm(res); showScreen('confirmCard', 3);
+    const res = await call('getRegistrationsByMobile', [m]);
+    if (!res || res.ok === false) throw new Error((res && res.message) || 'Unable to search registrations.');
+    const people = Array.isArray(res.participants) ? res.participants : [];
+    state.lookupParticipants = people;
+    if (!people.length) {
+      results.innerHTML = '<div class="lookupEmpty">No registrations were found for this mobile number. Check the number and try again.</div>';
+    } else {
+      results.innerHTML = '<div class="summaryTitle">Found ' + people.length + ' participant(s)</div>' + people.map(p => {
+        const status = String(p.registrationStatus || 'PENDING').toUpperCase();
+        const statusClass = status === 'CONFIRMED' ? 'confirmed' : status === 'CANCELLED' ? 'cancelled' : '';
+        const seat = status === 'CONFIRMED' && p.seatNo ? '<div class="seatNumberBanner" style="margin:8px 0;padding:8px"><span>SEAT NUMBER</span><strong>' + esc(p.seatNo) + '</strong></div>' : '<div class="lookupSeatPending">Seat number will be assigned after confirmation</div>' ;
+        return '<article class="lookupParticipant"><div class="lookupParticipantHead"><div style="width:100%"><div class="lookupParticipantName">' + esc(p.name || 'Participant') + '</div>' + seat + '<div class="lookupParticipantMeta">Age: ' + esc(p.age == null ? '-' : p.age) + ' · ' + esc(p.gender || '-') + ' · ' + esc(p.language || '-') + '</div></div><span class="lookupStatus ' + statusClass + '">' + esc(status.replace(/_/g, ' ')) + '</span></div><button type="button" class="primary" data-action="selectLookupParticipant" data-reg="' + esc(p.registrationNo || '') + '" data-mob="' + esc(m) + '">View Participant Details</button></article>';
+      }).join('');
+    }
+    results.hidden = false;
   } catch (e) { err.textContent = e.message; }
   finally { btn.disabled = false; btn.textContent = label; }
 }
+async function doLookup(registrationNo, mobile) {
+  const n = String(registrationNo || '').trim().toUpperCase(), m = digits10(mobile || $('lookupMob').value), err = $('lookupError');
+  err.textContent = '';
+  if (!n || !MOBILE_RE.test(m)) { err.textContent = 'Select a participant and enter a valid mobile number.'; return; }
+  try {
+    const res = await call('getRegistration', [n, m]);
+    if (!res || res.ok === false) throw new Error((res && res.message) || 'Registration details not found.');
+    state.participant = res; state.regNo = res.registrationNo; state.mobile = m; state.gender = res.gender || '';
+    renderConfirm(res); showScreen('confirmCard', 3);
+  } catch (e) { err.textContent = e.message; }
+}
 function shareConfirm() {
   const p = state.participant; if (!p) return;
-  const t = 'Registration Confirmed\nRegistration No: ' + p.registrationNo + '\nName: ' + p.name +
+  const t = 'Registration Confirmed\nSeat No: ' + (p.seatNo || 'Not assigned yet') + '\nName: ' + p.name +
             '\nVenue: ' + p.venue + '\nDate: ' + p.programDate + '\nReporting: ' + p.reportingTime;
   if (navigator.share) navigator.share({ title: 'Workshop Registration', text: t }).catch(() => {});
   else window.open('https://wa.me/?text=' + encodeURIComponent(t), '_blank');
@@ -1462,14 +1600,14 @@ function renderAdmin() {
   if ($('participantSort')) $('participantSort').value = state.participantSort || 'default';
   if ($('participantSortDir')) $('participantSortDir').value = state.participantSortDir || 'asc';
   const q = $('adminSearch').value.toLowerCase().trim();
-  const filtered = q ? state.rows.filter(r => [r.registrationNo, r.name, r.mobile, r.city, r.language, r.registrationStatus, r.gender, r.paymentStatus, r.confirmedBy].join(' ').toLowerCase().includes(q)) : state.rows;
+  const filtered = q ? state.rows.filter(r => [r.registrationNo, r.seatNo, r.name, r.mobile, r.city, r.language, r.registrationStatus, r.gender, r.paymentStatus, r.confirmedBy].join(' ').toLowerCase().includes(q)) : state.rows;
   const rows = sortParticipantRows(filtered);
   $('adminRows').innerHTML = rows.map(r => {
     const st = String(r.registrationStatus || '').toUpperCase();
     const sel = ['CONFIRMED','INCOMPLETE','CANCELLED'].map(o => '<option' + (o === st ? ' selected' : '') + '>' + o + '</option>').join('');
     const u = safeUrl(r.screenshotUrl);
-    return '<tr><td class="pickCell"><input type="checkbox" class="pickRow" data-reg="' + esc(r.registrationNo) + '"' + (state.bulkSelected.has(String(r.registrationNo)) ? ' checked' : '') + ' aria-label="Select ' + esc(r.registrationNo) + '"></td><td>' + esc(r.registrationNo) + '</td><td>' + esc(r.name) + '</td><td>' + esc(r.age) + '</td><td>' + esc(r.gender) +
-      '</td><td>' + esc(r.city) + '</td><td>' + esc(r.mobile) + '</td><td>' + esc(r.language) + '</td><td>' + esc(r.paymentStatus) +
+    return '<tr><td class="pickCell"><input type="checkbox" class="pickRow" data-reg="' + esc(r.registrationNo) + '"' + (state.bulkSelected.has(String(r.registrationNo)) ? ' checked' : '') + ' aria-label="Select ' + esc(r.registrationNo) + '"></td><td>' + esc(r.registrationNo) + '</td><td><b class="seatNoCell">' + esc(r.seatNo || '—') + '</b></td><td>' + esc(r.name) + '</td><td>' + esc(r.age) + '</td><td><span class="pill ' + (String(r.gender).toLowerCase() === 'female' ? 'female' : 'male') + '">' + esc(r.gender) + '</span>' +
+      '</td><td>' + esc(r.city) + '</td><td>' + esc(r.mobile) + '</td><td>' + esc(r.language) + '</td><td><span class="pill ' + (/CONFIRMED|PAID|RECEIVED|SUCCESS/i.test(String(r.paymentStatus)) ? 'ok' : /CANCEL|FAIL|REJECT/i.test(String(r.paymentStatus)) ? 'bad' : 'warn') + '">' + esc(r.paymentStatus) + '</span>' +
       '</td><td><select class="statusSel" data-reg="' + esc(r.registrationNo) + '">' + sel + '</select></td><td>' +
       (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">Open</a>' : '-') + '</td><td>' +
       (r.confirmedBy ? esc(r.confirmedBy) + (r.confirmedAt ? '<div class="muted" style="font-size:10px">' + esc(formatDateTime(r.confirmedAt)) + '</div>' : '') : '-') + '</td><td>' +
@@ -1479,7 +1617,7 @@ function renderAdmin() {
       (state.adminRole === 'SUPER_ADMIN' && String(r.registrationStatus || '').toUpperCase() === 'CANCELLED' ?
         ' <button type="button" class="waAction deleteAction" data-action="deleteCancelled" data-reg="' + esc(r.registrationNo) + '">🗑 Delete</button>' : '') +
       '</td></tr>';
-  }).join('') || '<tr><td colspan="13">No registrations found.</td></tr>';
+  }).join('') || '<tr><td colspan="14">No registrations found.</td></tr>';
   updateBulkSelectionUI();
 }
 async function onStatusChange(sel) {
@@ -1495,7 +1633,7 @@ async function onStatusChange(sel) {
   } catch (e) { $('adminMsg').textContent = e.message; renderAdmin(); }
 }
 function exportCsv() {
-  const cols = [['Reg No','registrationNo'],['Timestamp','timestamp'],['Name','name'],['Age','age'],['Gender','gender'],['Location','city'],
+  const cols = [['Reg No','registrationNo'],['Seat No','seatNo'],['Timestamp','timestamp'],['Name','name'],['Age','age'],['Gender','gender'],['Location','city'],
     ['Mobile','mobile'],['Language','language'],['Payment Status','paymentStatus'],['Registration Status','registrationStatus'],['Screenshot','screenshotUrl'],['Admin Note','adminNote']];
   const cell = v => { v = String(v == null ? '' : v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
   const csv = '\ufeff' + [cols.map(c => cell(c[0])).join(',')].concat(state.rows.map(r => cols.map(c => cell(r[c[1]])).join(','))).join('\r\n');
@@ -1552,7 +1690,7 @@ function bulkToggleRow(cb) {
   updateBulkSelectionUI();
 }
 function fillBulkTemplate(template, r) {
-  return String(template || '').replace(/\{\{\s*(name|registrationNo|mobile|gender|city|language)\s*\}\}/gi, (_, k) => String(r[k] || ''));
+  return String(template || '').replace(/\{\{\s*(name|seatNo|registrationNo|mobile|gender|city|language)\s*\}\}/gi, (_, k) => String(r[k] || (k.toLowerCase() === 'seatno' ? 'Not assigned yet' : '')));
 }
 function bulkPreview() {
   const rows = getBulkRows();
@@ -1577,7 +1715,7 @@ function bulkSendAll() {
     delaySeconds: delay,
     workshop: 'TAHAFFUZ-E-AQeedah WA MANHAJ - Ek Rozah Tarbiyati Workshop',
     recipients: rows.map(r => ({
-      registrationNo: r.registrationNo || '', name: r.name || '', mobile: String(r.mobile || '').replace(/\D/g,''), gender: r.gender || '', city: r.city || '', language: r.language || '',
+      registrationNo: r.registrationNo || '', seatNo: r.seatNo || '', name: r.name || '', mobile: String(r.mobile || '').replace(/\D/g,''), gender: r.gender || '', city: r.city || '', language: r.language || '',
       message: fillBulkTemplate(template, r)
     }))
   };
@@ -1606,6 +1744,8 @@ const actions = {
   print: () => window.print(),
   share: shareConfirm,
   doLookup: doLookup,
+  searchMyRegistrations: searchMyRegistrations,
+  selectLookupParticipant: t => doLookup(t.dataset.reg, t.dataset.mob),
   adminLogin: () => adminLogin(),
   manualLogin: () => manualLogin(),
   manualLogout: manualLogout,
@@ -1624,7 +1764,7 @@ const actions = {
   resume: goPayment,
   discardResume: () => { store(null); clearDraft(); state.regNo = ''; state.mobile = ''; state.name = ''; state.gender = ''; $('resumeBox').hidden = true; },
   resumeFromConfirm: goPayment,
-  prefillLookup: t => { $('lookupNo').value = t.dataset.reg || ''; $('lookupMob').value = t.dataset.mob || ''; showScreen('lookupCard'); }
+  prefillLookup: t => { $('lookupMob').value = t.dataset.mob || ''; showScreen('lookupCard'); searchMyRegistrations(); }
 };
 document.addEventListener('click', e => {
   const t = e.target.closest('[data-action]');

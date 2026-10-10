@@ -1,0 +1,167 @@
+\n================================================================
+Started: 2026-10-10T16:07:19
+================================================================
+TRW Workshop WhatsApp Web Sender
+================================================================
+Queue file: C:\Users\faiza\Downloads\TRW_whatsapp_queue.json
+Browser profile: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_WhatsApp_Profile
+Pause file: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_PAUSE.txt
+Sending log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+
+Background sender is running. Browser starts minimized; restore it to scan the QR code if needed.
+Use only for relevant updates to participants who agreed to receive them.
+Minimum delay between messages: 4 seconds.
+Using Chrome: C:\Program Files\Google\Chrome\Application\chrome.exe
+
+Opening WhatsApp Web (attempt 1)...
+WhatsApp Web page loaded.
+
+1) If QR code appears, scan it with your phone.
+2) Wait until WhatsApp Web is logged in.
+3) In the workshop Admin Dashboard, open Bulk WhatsApp Updates and click Send Updates.
+4) The queue JSON in Downloads will be detected automatically.
+
+\n📲 Queue received: 1 message(s). Delay: 8s
+[1/1] Sending → M-005 | Mohammed Faizan Mulla | 8892983378
+\n================================================================
+Started: 2026-10-10T16:08:58
+================================================================
+TRW Workshop WhatsApp Web Sender
+================================================================
+Queue file: C:\Users\faiza\Downloads\TRW_whatsapp_queue.json
+Browser profile: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_WhatsApp_Profile
+Pause file: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_PAUSE.txt
+Sending log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+
+Background sender is running. Browser starts minimized; restore it to scan the QR code if needed.
+Use only for relevant updates to participants who agreed to receive them.
+Minimum delay between messages: 4 seconds.
+Using Chrome: C:\Program Files\Google\Chrome\Application\chrome.exe
+Traceback (most recent call last):
+  File "TRW_whatsapp_sender.py", line 260, in <module>
+  File "TRW_whatsapp_sender.py", line 213, in main
+  File "playwright\sync_api\_generated.py", line 17120, in launch_persistent_context
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.launch_persistent_context(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<51 lines>...
+        )
+        ^
+    )
+    ^
+  File "playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "playwright\_impl\_browser_type.py", line 169, in launch_persistent_context
+    result = await self._channel.send_return_as_dict(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "launchPersistentContext", TimeoutSettings.launch_timeout, params
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "playwright\_impl\_connection.py", line 103, in send_return_as_dict
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "playwright\_impl\_connection.py", line 632, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: : Opening in existing browser session. This usually means that the profile is already in use by another instance of Chromium.
+Call log:
+  - <launching> C:\Program Files\Google\Chrome\Application\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --start-minimized --user-data-dir=C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_WhatsApp_Profile --remote-debugging-pipe about:blank
+  - <launched> pid=25388
+  - [pid=25388][out] Opening in existing browser session.
+  - [pid=25388] <gracefully close start>
+  - [pid=25388] <kill>
+  - [pid=25388] <will force kill>
+  - [pid=25388] taskkill stderr: ERROR: The process "25388" not found.
+  - [pid=25388] <process did exit: exitCode=0, signal=null>
+  - [pid=25388] starting temporary directories cleanup
+  - [pid=25388] finished temporary directories cleanup
+  - [pid=25388] <gracefully close end>
+
+    ⚠ attempt 1/3 failed: : Target page, context or browser has been closed
+Call log:
+  - waiting for locator("footer div[contenteditable=\"true\"][role=\"textbox\"]").last to be visible
+
+\n================================================================
+Started: 2026-10-10T16:09:08
+================================================================
+TRW Workshop WhatsApp Web Sender
+================================================================
+Queue file: C:\Users\faiza\Downloads\TRW_whatsapp_queue.json
+Browser profile: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_WhatsApp_Profile
+Pause file: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_PAUSE.txt
+Sending log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+
+Background sender is running. Browser starts minimized; restore it to scan the QR code if needed.
+Use only for relevant updates to participants who agreed to receive them.
+Minimum delay between messages: 4 seconds.
+Using Chrome: C:\Program Files\Google\Chrome\Application\chrome.exe
+
+Opening WhatsApp Web (attempt 1)...
+WhatsApp Web page loaded.
+
+1) If QR code appears, scan it with your phone.
+2) Wait until WhatsApp Web is logged in.
+3) In the workshop Admin Dashboard, open Bulk WhatsApp Updates and click Send Updates.
+4) The queue JSON in Downloads will be detected automatically.
+
+    ⚠ attempt 2/3 failed: : Target page, context or browser has been closed
+    ⚠ attempt 3/3 failed: : Target page, context or browser has been closed
+    ✗ failed: : Target page, context or browser has been closed
+Could not archive queue: [WinError 2] The system cannot find the file specified
+\nQueue processing finished.
+Log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+1 failed item(s) saved for review: C:\Users\faiza\Downloads\TRW_whatsapp_failed_queue.json
+Review the log before retrying; do not resend messages that may already have delivered.
+\n📲 Queue received: 1 message(s). Delay: 8s
+[1/1] Sending → M-005 | Mohammed Faizan Mulla | 8892983378
+    ⚠ attempt 1/3 failed: : Target page, context or browser has been closed
+\n📲 Queue received: 1 message(s). Delay: 8s
+[1/1] Sending → M-005 | Mohammed Faizan Mulla | 8892983378
+    ⚠ attempt 2/3 failed: : Target page, context or browser has been closed
+    ✓ send action clicked (check WhatsApp for delivery)
+\nQueue processing finished.
+Archived: C:\Users\faiza\Downloads\TRW_whatsapp_archive\TRW_whatsapp_queue_20261010_161010.json
+Log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+    ⚠ attempt 3/3 failed: : Target page, context or browser has been closed
+    ✗ failed: : Target page, context or browser has been closed
+Could not archive queue: [WinError 2] The system cannot find the file specified
+\nQueue processing finished.
+Log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+1 failed item(s) saved for review: C:\Users\faiza\Downloads\TRW_whatsapp_failed_queue.json
+Review the log before retrying; do not resend messages that may already have delivered.
+\n📲 Queue received: 3 message(s). Delay: 8s
+[1/3] Sending → M-096 | Ayan Farooque Tabib | 8010858139
+\n📲 Queue received: 3 message(s). Delay: 8s
+[1/3] Sending → M-096 | Ayan Farooque Tabib | 8010858139
+    ⚠ attempt 1/3 failed: : Target page, context or browser has been closed
+    ⚠ attempt 2/3 failed: : Target page, context or browser has been closed
+    ⚠ attempt 3/3 failed: : Target page, context or browser has been closed
+    ✗ failed: : Target page, context or browser has been closed
+    ✓ send action clicked (check WhatsApp for delivery)
+[2/3] Sending → M-005 | Mohammed Faizan Mulla | 8892983378
+    ⚠ attempt 1/3 failed: : Target page, context or browser has been closed
+[2/3] Sending → M-005 | Mohammed Faizan Mulla | 8892983378
+    ⚠ attempt 2/3 failed: : Target page, context or browser has been closed
+    ✓ send action clicked (check WhatsApp for delivery)
+    ⚠ attempt 3/3 failed: : Target page, context or browser has been closed
+    ✗ failed: : Target page, context or browser has been closed
+[3/3] Sending → M-002 | Mohammed Hamza Shaikh | 9370162919
+[3/3] Sending → M-002 | Mohammed Hamza Shaikh | 9370162919
+    ⚠ attempt 1/3 failed: : Target page, context or browser has been closed
+    ✓ send action clicked (check WhatsApp for delivery)
+\nQueue processing finished.
+Archived: C:\Users\faiza\Downloads\TRW_whatsapp_archive\TRW_whatsapp_queue_20261010_161520.json
+Log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+    ⚠ attempt 2/3 failed: : Target page, context or browser has been closed
+    ⚠ attempt 3/3 failed: : Target page, context or browser has been closed
+    ✗ failed: : Target page, context or browser has been closed
+Could not archive queue: [WinError 2] The system cannot find the file specified
+\nQueue processing finished.
+Log: C:\Users\faiza\Downloads\TRW_WhatsApp_Background_EXE_Setup\dist\TRWWhatsAppBackground\TRW_whatsapp_log.csv
+3 failed item(s) saved for review: C:\Users\faiza\Downloads\TRW_whatsapp_failed_queue.json
+Review the log before retrying; do not resend messages that may already have delivered.
