@@ -1283,6 +1283,18 @@ body{letter-spacing:.005em}
   #adminCard .tblParticipants tbody tr:nth-child(even) td { background:#f8fbf9 !important; }
   #adminCard .tblParticipants tbody tr:nth-child(even) td:nth-child(4) { background:#f8fbf9 !important; }
 }
+
+/* Public confirmed-seat availability */
+/* Hide seat availability on the public webpage; backend capacity enforcement remains unchanged. */
+#seatAvailability{display:none!important}
+
+.seatAvailability{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 auto 14px;max-width:900px}
+.seatAvailability .seatCard{background:#fff;border:1px solid #d9e4df;border-radius:14px;padding:12px 14px;box-shadow:0 5px 16px -13px rgba(6,63,69,.3)}
+.seatAvailability .seatTop{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800}
+.seatAvailability .seatLeft{font-size:21px;font-weight:900;color:#17633f}
+.seatAvailability .seatMeta{font-size:12px;color:var(--muted);margin-top:4px}
+.seatAvailability .full{color:#a92e2e}
+@media(max-width:420px){.seatAvailability{gap:7px}.seatAvailability .seatCard{padding:10px}.seatAvailability .seatLeft{font-size:18px}}
 </style>
 </head>
 <body>
@@ -1305,6 +1317,10 @@ body{letter-spacing:.005em}
 </header>
 
 <main class="content">
+<div class="seatAvailability" id="seatAvailability" aria-live="polite">
+ <div class="seatCard"><div class="seatTop"><span>👨 Male seats left</span><span class="seatLeft" id="maleSeatsLeft">—</span></div><div class="seatMeta" id="maleSeatMeta">Loading confirmed seats…</div></div>
+ <div class="seatCard"><div class="seatTop"><span>👩 Female seats left</span><span class="seatLeft" id="femaleSeatsLeft">—</span></div><div class="seatMeta" id="femaleSeatMeta">Loading confirmed seats…</div></div>
+</div>
 <div class="steps" id="steps"><div class="step active" id="st1">1 REGISTRATION</div><div class="step" id="st2">2 PAYMENT</div><div class="step" id="st3">3 CONFIRM</div></div>
 
 <!-- ============ 1. REGISTER ============ -->
@@ -1691,6 +1707,36 @@ async function readJson(res) {
 function rpc(name, body) {
   return fetchT(BASE + '/rest/v1/rpc/' + name, { method: 'POST', headers: sbHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify(body) }).then(readJson);
 }
+
+const SEAT_LIMITS = { Male: 150, Female: 170 };
+async function refreshSeatAvailability() {
+  const maleLeft = $('maleSeatsLeft'), femaleLeft = $('femaleSeatsLeft');
+  try {
+    const d = await rpc('get_seat_availability', {});
+    if (!d || d.ok === false) throw new Error((d && d.message) || 'Availability unavailable');
+    const mc = Math.max(0, Number(d.maleConfirmed || 0)), fc = Math.max(0, Number(d.femaleConfirmed || 0));
+    const ml = Math.max(0, SEAT_LIMITS.Male - mc), fl = Math.max(0, SEAT_LIMITS.Female - fc);
+    if (maleLeft) { maleLeft.textContent = ml + ' left'; maleLeft.classList.toggle('full', ml === 0); }
+    if (femaleLeft) { femaleLeft.textContent = fl + ' left'; femaleLeft.classList.toggle('full', fl === 0); }
+    if ($('maleSeatMeta')) $('maleSeatMeta').textContent = ml ? 'Seats available' : 'FULL — registrations closed';
+    if ($('femaleSeatMeta')) $('femaleSeatMeta').textContent = fl ? 'Seats available' : 'FULL — registrations closed';
+    const gender = $('gender') ? $('gender').value : '';
+    const submit = $('registerBtn') || $('submitRegistrationBtn');
+    if (submit && (gender === 'Male' || gender === 'Female')) {
+      const left = gender === 'Male' ? ml : fl;
+      submit.disabled = left <= 0;
+      submit.title = left <= 0 ? gender + ' seats are full' : '';
+    }
+    return d;
+  } catch (e) {
+    if (maleLeft) maleLeft.textContent = '—';
+    if (femaleLeft) femaleLeft.textContent = '—';
+    if ($('maleSeatMeta')) $('maleSeatMeta').textContent = 'Could not load live count';
+    if ($('femaleSeatMeta')) $('femaleSeatMeta').textContent = 'Could not load live count';
+    console.warn('Seat availability unavailable:', e);
+    return null;
+  }
+}
 function shotUrl(p) { return p ? PUBLIC_SHOT + p.split('/').map(encodeURIComponent).join('/') : ''; }
 function decorate(r) { if (r) r.screenshotUrl = shotUrl(r.screenshotPath); return r; }
 function dataUrlToBlob(u) {
@@ -1705,9 +1751,13 @@ async function call(fn, args) {
   if (!SB_OK) throw new Error('Setup needed: set your NEW Supabase Project URL and Publishable Key in index.html.');
   try {
     switch (fn) {
+      case 'getSeatAvailability':
+        return await rpc('get_seat_availability', {});
       case 'submitRegistration': {
         const p = args[0];
-        return await rpc('register_participant', { p_name: p.name, p_age: Number(p.age), p_gender: p.gender, p_city: p.city, p_mobile: p.mobile, p_language: p.language });
+        const result = await rpc('register_participant', { p_name: p.name, p_age: Number(p.age), p_gender: p.gender, p_city: p.city, p_mobile: p.mobile, p_language: p.language });
+        refreshSeatAvailability();
+        return result;
       }
       case 'chooseCash':
         return await rpc('choose_cash_payment', { p_reg: args[0], p_mobile: args[1] });
@@ -2499,6 +2549,10 @@ $('manualPin').addEventListener('keydown', e => { if (e.key === 'Enter') manualL
 $('lookupMob').addEventListener('keydown', e => { if (e.key === 'Enter') doLookup(); });
 ['mobile','lookupMob'].forEach(id => $(id).addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d+ ]/g, ''); }));
 $('manualMobile').addEventListener('input', e => { e.target.value = e.target.value.replace(/[^\d+ ]/g, ''); });
+if ($('gender')) $('gender').addEventListener('change', () => { refreshSeatAvailability(); });
+setInterval(refreshSeatAvailability, 30000);
+refreshSeatAvailability();
+
 ['name','age','gender','city','mobile','language'].forEach(id => {
   const el=$(id);
   if (el) el.addEventListener('input', () => saveDraft('register'));
