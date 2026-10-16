@@ -399,6 +399,7 @@ td .error{margin:0;font-size:inherit}
 .seatNumberBanner{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px auto 12px;padding:10px 18px;width:min(100%,260px);border:1.5px solid var(--gold);border-radius:14px;background:linear-gradient(135deg,#f8edc9,#fffaf0);box-shadow:0 4px 14px rgba(185,138,44,.14)}
 .seatNumberBanner span{font-size:10px;letter-spacing:1.5px;font-weight:900;color:#725316}
 .seatNumberBanner strong{font-size:30px;line-height:1.1;font-weight:950;letter-spacing:1px;color:var(--teal-800)}
+.tokenNoCell{display:inline-block;font-weight:900;color:#7c3aed;background:#f3e8ff;border:1px solid #ddd6fe;border-radius:7px;padding:3px 7px;white-space:nowrap}
 .seatNoCell{display:inline-block;min-width:58px;color:#684d12;font-weight:900;white-space:nowrap}.lookupSeatPending{font-size:12px;color:#7b6b47;font-weight:700;margin:7px 0}.seatNoMini{display:inline-block;margin-top:4px;padding:3px 6px;border-radius:6px;background:#fff4d6;border:1px solid #ead28d;color:#684d12;font-size:10px;font-weight:900;white-space:nowrap}
 
 .regRight .card:not(.span2) .title{font-size:18px;line-height:1.25}
@@ -437,7 +438,8 @@ td .error{margin:0;font-size:inherit}
   .tblParticipants th:nth-child(13),.tblParticipants td:nth-child(13){width:7%}
   .tblParticipants th:nth-child(14),.tblParticipants td:nth-child(14){width:9%}
   .tblParticipants td:nth-child(2){font-weight:800;color:var(--teal-800);font-size:11px;white-space:nowrap;overflow-wrap:normal}
-  .tblParticipants td:nth-child(3) .seatNoCell{min-width:0;font-size:11px}
+  .tblParticipants td:nth-child(3) .tokenNoCell{display:inline-block;font-weight:900;color:#7c3aed;background:#f3e8ff;border:1px solid #ddd6fe;border-radius:7px;padding:3px 7px;white-space:nowrap}
+.seatNoCell{min-width:0;font-size:11px}
   .tblParticipants td select{width:100%;font-size:11px;padding:5px 2px}
   .tblParticipants .waAction{display:block;width:100%;margin:2px 0;padding:7px 3px;font-size:10px;letter-spacing:0}
   .tblParticipants .muted{font-size:9px!important}
@@ -1295,6 +1297,30 @@ body{letter-spacing:.005em}
 .seatAvailability .seatMeta{font-size:12px;color:var(--muted);margin-top:4px}
 .seatAvailability .full{color:#a92e2e}
 @media(max-width:420px){.seatAvailability{gap:7px}.seatAvailability .seatCard{padding:10px}.seatAvailability .seatLeft{font-size:18px}}
+
+/* Compact participant table + responsive reminder workflow */
+@media(min-width:600px){
+  #adminCard .tblParticipants th,#adminCard .tblParticipants td{padding:5px 4px;font-size:11px;line-height:1.18}
+  #adminCard .tblParticipants th{font-size:9.5px}
+  #adminCard .tblParticipants .waAction{padding:5px 7px;font-size:10px;white-space:nowrap}
+}
+@media(max-width:599px){
+  #adminCard .tableWrap{overflow-x:hidden!important;max-height:70vh}
+  #adminCard .tblParticipants{width:100%!important;min-width:0!important;table-layout:fixed!important;border-collapse:separate}
+  #adminCard .tblParticipants th,#adminCard .tblParticipants td{display:none!important}
+  #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4),
+  #adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5),
+  #adminCard .tblParticipants th:nth-child(15),#adminCard .tblParticipants td:nth-child(15){display:table-cell!important}
+  #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){width:74px;min-width:74px;max-width:74px;text-align:center}
+  #adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5){width:auto;min-width:0;max-width:none;white-space:normal;overflow-wrap:anywhere}
+  #adminCard .tblParticipants th:nth-child(15),#adminCard .tblParticipants td:nth-child(15){width:128px;min-width:128px;max-width:128px;text-align:center}
+  #adminCard .tblParticipants td:nth-child(4) .tokenNoCell{font-size:14px;padding:5px 7px}
+  #adminCard .tblParticipants td:nth-child(5){font-size:12px;font-weight:750}
+  #adminCard .tblParticipants .waAction{display:block;width:100%;margin:0;padding:9px 5px;font-size:11px;line-height:1.15;white-space:normal}
+  #adminCard .tblParticipants tbody tr td{padding:8px 5px;vertical-align:middle}
+  #adminCard .tblParticipants th:nth-child(4){position:static!important;left:auto!important}
+}
+
 </style>
 </head>
 <body>
@@ -1438,23 +1464,31 @@ body{letter-spacing:.005em}
     <div class="bulkInner">
     <div class="sub">Prepare a message for all visible records and send it through the local WhatsApp Web automation.</div>
     <div class="bulkGrid" style="margin-top:9px">
+     <div class="field"><label for="bulkMessageType">MESSAGE TYPE</label><select id="bulkMessageType"><option value="tokenReminder">🎟️ Token number &amp; workshop reminder (selected language)</option><option value="custom">✍️ Custom template</option></select></div>
      <div class="field"><label for="bulkFilter">STATUS</label><select id="bulkFilter"><option value="ALL">All visible records</option><option value="CONFIRMED">Confirmed only</option><option value="INCOMPLETE">Pending only</option></select></div>
      <div class="field"><label for="bulkGender">GENDER</label><select id="bulkGender"><option value="ALL">All genders</option><option value="Male">Male</option><option value="Female">Female</option></select></div>
      <div class="field"><label for="bulkLanguage">LANGUAGE</label><select id="bulkLanguage"><option value="ALL">All languages</option><option value="Urdu">Urdu</option><option value="Hindi">Hindi</option><option value="English">English</option></select></div>
      <div class="field"><label for="bulkDelay">DELAY BETWEEN MESSAGES</label><select id="bulkDelay"><option value="2">2 seconds</option><option value="3">3 seconds</option><option value="4">4 seconds</option><option value="5">5 seconds</option><option value="6">6 seconds</option><option value="7">7 seconds</option><option value="8" selected>8 seconds</option><option value="9">9 seconds</option><option value="10">10 seconds</option></select></div>
     </div>
-    <div class="field"><label for="bulkMessage">MESSAGE</label><textarea id="bulkMessage">Assalamu'alaikum warahmatullahi wabarakatuhu
+    <div class="field"><label for="bulkMessage">MESSAGE / CUSTOM TEMPLATE</label><textarea id="bulkMessage">Assalamu'alaikum warahmatullahi wabarakatuhu
 
-TAHAFFUZ-E-AQEEDAH WA MANHAJ
-Ek Rozah Tarbiyati Workshop
+🌙 *TAHAFFUZ-E-AQEEDAH WA MANHAJ* 🌙
+📖 *Ek Rozah Tarbiyati Workshop*
 
-Participant Name: {{name}}
-Seat Number: {{seatNo}}
+👤 Participant Name: {{name}}
+🎟️ Token Number: {{tokenNo}}
+🪑 Seat Number: {{seatNo}}
 
-Your seat number is important. Please keep it safely for the workshop.
+Please keep your token number safe and collect/confirm it with the volunteers at the venue. We look forward to welcoming you, In shaa Allah.
 
-JazakAllahu Khairan.</textarea>
-    <div class="bulkHint">Variables: <b>{{name}}</b>, <b>{{seatNo}}</b>, <b>{{registrationNo}}</b> (optional), <b>{{mobile}}</b>, <b>{{gender}}</b>, <b>{{city}}</b>, <b>{{language}}</b>. For confirmed participants, {{seatNo}} inserts their assigned seat (e.g. M-001 / F-001). Pending participants may have no seat number yet. Tick individual participants below to send only to selected people. If none are ticked, the current search/filter is used.</div>
+📍 Venue: Masjid-e-Umar Khalifa
+🗓️ Date: Sunday, 18 October 2026
+🕤 Reporting Time: 9:30 AM
+🕰️ Programme: From 9:30 AM until Isha
+🗺️ Location: https://maps.app.goo.gl/AeNpn1CwEe3KBpJMA
+
+🤲 JazakAllahu Khairan.</textarea>
+    <div class="bulkHint">Choose <b>Token number &amp; workshop reminder</b> to automatically generate the message in each participant's selected Urdu, Hindi, or English. Custom templates support <b>{{name}}</b>, <b>{{tokenNo}}</b>, <b>{{seatNo}}</b>, <b>{{registrationNo}}</b>, <b>{{mobile}}</b>, <b>{{gender}}</b>, <b>{{city}}</b>, and <b>{{language}}</b>. Tick participants below to send only to selected people; otherwise current search/filters are used.</div>
     <div class="bulkSelectBar">
       <label><input type="checkbox" id="bulkSelectAll" data-action="bulkSelectAll"> Select all visible</label>
       <button type="button" class="selectBtn" data-action="bulkClearSelection">✕ Clear selection</button>
@@ -1470,7 +1504,7 @@ JazakAllahu Khairan.</textarea>
     <div class="participantControlsTitle">↕ Sort &amp; Filter Participants</div>
     <div class="participantControlGrid">
      <label class="participantControl"><span>Sort by</span><select id="participantSort" aria-label="Sort participants">
-      <option value="default">Newest first (default)</option><option value="registrationNo">Registration No.</option><option value="seatNo">Seat No.</option><option value="name">Name</option><option value="age">Age</option><option value="gender">Gender</option><option value="city">Location</option><option value="mobile">Mobile</option><option value="language">Language</option><option value="paymentStatus">Payment</option><option value="registrationStatus">Registration Status</option><option value="confirmedBy">Confirmed By</option><option value="timestamp">Registration Time</option>
+      <option value="default">Newest first (default)</option><option value="registrationNo">Registration No.</option><option value="seatNo">Seat No.</option><option value="tokenNo">Token No.</option><option value="name">Name</option><option value="age">Age</option><option value="gender">Gender</option><option value="city">Location</option><option value="mobile">Mobile</option><option value="language">Language</option><option value="paymentStatus">Payment</option><option value="registrationStatus">Registration Status</option><option value="confirmedBy">Confirmed By</option><option value="timestamp">Registration Time</option>
      </select></label>
      <label class="participantControl"><span>Direction</span><select id="participantSortDir" aria-label="Sort direction"><option value="asc">Ascending (A–Z)</option><option value="desc">Descending (Z–A)</option></select></label>
      <label class="participantControl"><span>Registration status</span><select id="participantFilterStatus" aria-label="Filter by registration status"><option value="ALL">All statuses</option><option value="CONFIRMED">Confirmed</option><option value="CONFIRMED_CASH_PENDING">Cash pending</option><option value="INCOMPLETE">Pending / Incomplete</option><option value="CANCELLED">Cancelled</option></select></label>
@@ -1481,7 +1515,7 @@ JazakAllahu Khairan.</textarea>
     </div>
     <div class="participantFilterFooter"><span id="participantResultCount" aria-live="polite">Showing participants</span><button type="button" class="selectBtn" id="clearParticipantFilters">Reset filters</button></div>
    </div>
-   <div class="tableWrap"><table class="tblParticipants"><thead><tr><th class="pickHead"><input type="checkbox" id="bulkSelectAllTable" data-action="bulkSelectAll" title="Select all visible"></th><th>Reg No</th><th>Seat No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Confirmed By</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
+   <div class="tableWrap"><table class="tblParticipants"><thead><tr><th class="pickHead"><input type="checkbox" id="bulkSelectAllTable" data-action="bulkSelectAll" title="Select all visible"></th><th>Reg No</th><th>Seat No</th><th>Token No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Confirmed By</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
   </div>
  </div>
 </section>
@@ -1569,7 +1603,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const digits10 = v => String(v || '').replace(/\D/g, '').slice(-10);
 const MOBILE_RE = /^[6-9]\d{9}$/;
-const state = { regBusy:false, regReq:0, regNo:'', mobile:'', name:'', gender:'', participant:null, pin:'', adminRole:'', adminId:null, adminName:'', rows:[], manualPin:'', shot:null, shotBusy:null, bulkSelected:new Set(), lookupParticipants:[], stage:'register', participantSort:'default', participantSortDir:'asc' };
+const state = { regBusy:false, regReq:0, regNo:'', mobile:'', name:'', gender:'', participant:null, pin:'', adminRole:'', adminId:null, adminName:'', rows:[], manualPin:'', shot:null, shotBusy:null, bulkSelected:new Set(), lookupParticipants:[], stage:'register', participantSort:'tokenNo', participantSortDir:'asc' };
 
 function store(v) { try { v ? localStorage.setItem(STORE_KEY, JSON.stringify(v)) : localStorage.removeItem(STORE_KEY); } catch (e) {} }
 function loadStore() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { return null; } }
@@ -2141,6 +2175,26 @@ function whatsappPaymentMessage(r) {
   // =========================
   return `Assalamu'alaikum warahmatullahi wabarakatuhu\n\n*TAHAFFUZ-E-AQEEDAH WA MANHAJ*\n*Ek Rozah Tarbiyati Workshop*\n\nParticipant Name: ${r.name}\nRegistration No.: ${r.registrationNo}\n\nYour registration details have been received.\n\nKindly share the ₹50 payment screenshot on this WhatsApp for seat confirmation.\n\nJazakAllahu Khairan.`;
 }
+function whatsappTokenReminderMessage(r) {
+  const lang = String(r.language || '').trim().toLowerCase();
+  const name = r.name || 'Participant';
+  const token = r.tokenNo || 'Please contact the volunteers';
+  const map = MAP_URL || 'https://maps.app.goo.gl/AeNpn1CwEe3KBpJMA';
+  // Keep the participant and token labels in English for every selected language.
+  // Unicode emojis are supported by WhatsApp; encode the complete message in the wa.me URL.
+  const details = `👤 *Participant Name:* ${name}\n🎟️ *Token Number:* ${token}`;
+  const commonEnd = `\n\n📍 *Venue:* Masjid-e-Umar Khalifa, Solapur\n🗓️ *Date:* Sunday, 18 October 2026\n🕤 *Reporting Time:* 9:30 AM\n🗺️ *Location:* ${map}\n\n🤲 JazakAllahu Khairan.`;
+  if (lang === 'hindi') return `अस्सलामु अलैकुम व रहमतुल्लाहि व बरकातुहू 🤲\n\n🌙 *TAHAFFUZ-E-AQEEDAH WA MANHAJ* 🌙\n📖 *एक रोज़ा तरबियती वर्कशॉप*\n\n${details}\n\n📢 कृपया कार्यक्रम स्थल पर स्वयंसेवकों से अपना टोकन प्राप्त करें।\n\n✨ हम आपका स्वागत करने के लिए उत्सुक हैं, इंशा अल्लाह।${commonEnd}`;
+  if (lang === 'urdu') return `السلام علیکم ورحمۃ اللہ وبرکاتہ 🤲\n\n🌙 *TAHAFFUZ-E-AQEEDAH WA MANHAJ* 🌙\n📖 *ایک روزہ تربیتی ورکشاپ*\n\n${details}\n\n📢 براہِ کرم مقام پر رضاکاروں سے اپنا ٹوکن حاصل کریں۔\n\n✨ ہم ان شاء اللہ آپ کے استقبال کے منتظر ہیں۔${commonEnd}`;
+  if (lang === 'marathi') return `अस्सलामु अलैकुम व रहमतुल्लाहि व बरकातुहू 🤲\n\n🌙 *TAHAFFUZ-E-AQEEDAH WA MANHAJ* 🌙\n📖 *एक दिवसीय तरबियती कार्यशाळा*\n\n${details}\n\n📢 कृपया कार्यक्रमस्थळी स्वयंसेवकांकडून आपले टोकन घ्या.\n\n✨ इंशा अल्लाह, आपल्या स्वागतासाठी आम्ही उत्सुक आहोत.${commonEnd}`;
+  return `Assalamu'alaikum warahmatullahi wabarakatuhu 🤲\n\n🌙 *TAHAFFUZ-E-AQEEDAH WA MANHAJ* 🌙\n📖 *Ek Rozah Tarbiyati Workshop*\n\n${details}\n\n📢 Please collect your token from volunteers at the venue.\n\n✨ We look forward to welcoming you, In shaa Allah.${commonEnd}`;
+}
+function whatsappTokenReminder(r) {
+  const mobile = String(r.mobile || '').replace(/\D/g, '').slice(-10);
+  if (!/^[6-9]\d{9}$/.test(mobile)) { window.alert('A valid Indian mobile number is not available for this participant.'); return; }
+  const url = 'https://wa.me/91' + mobile + '?text=' + encodeURIComponent(whatsappTokenReminderMessage(r));
+  window.open(url, '_blank', 'noopener');
+}
 function whatsappPaymentReminder(r) {
   const mobile = String(r.mobile || '').replace(/\D/g, '');
   if (!/^[6-9]\d{9}$/.test(mobile)) return;
@@ -2248,13 +2302,13 @@ async function showHistory(reg) {
   try { const res=await call('adminHistory',[state.pin,reg]); if(!res||res.ok===false) throw new Error((res&&res.message)||'Unable to load history.'); const items=res.history||[]; const text=items.length ? items.map(x=>formatDateTime(x.createdAt)+' — '+(x.adminName||'Unknown')+' — '+x.action+' — '+(x.oldStatus||'-')+' → '+(x.newStatus||'-')+(x.note?' — '+x.note:'')).join('\n') : 'No status history recorded.'; window.alert('Registration History: '+reg+'\n\n'+text); } catch(e){ $('adminMsg').textContent=e.message; }
 }
 function sortParticipantRows(rows) {
-  const key = state.participantSort || 'default';
+  const key = state.participantSort || 'tokenNo';
   const dir = state.participantSortDir === 'desc' ? -1 : 1;
   const out = rows.slice();
-  if (key === 'default') return out.reverse();
+  if (key === 'default') return out.sort((a,b) => Number(String(a.tokenNo || '').replace(/\D/g,'')) - Number(String(b.tokenNo || '').replace(/\D/g,''))); 
   const value = r => {
     const v = r ? r[key] : '';
-    if (key === 'age') return Number(v || 0);
+    if (key === 'age' || key === 'tokenNo' || key === 'seatNo') return Number(String(v || '').replace(/[^0-9.]/g,'')) || 0;
     if (key === 'timestamp' || key === 'confirmedAt') { const t = Date.parse(v || ''); return Number.isNaN(t) ? 0 : t; }
     return String(v == null ? '' : v).trim().toLowerCase();
   };
@@ -2275,7 +2329,7 @@ function renderAdmin() {
   const filterCity = $('participantFilterCity') ? $('participantFilterCity').value : 'ALL';
   const filterLanguage = $('participantFilterLanguage') ? $('participantFilterLanguage').value : 'ALL';
   const filterPayment = $('participantFilterPayment') ? $('participantFilterPayment').value : 'ALL';
-  let filtered = q ? state.rows.filter(r => [r.registrationNo, r.seatNo, r.name, r.mobile, r.city, r.language, r.registrationStatus, r.gender, r.paymentStatus, r.confirmedBy].join(' ').toLowerCase().includes(q)) : state.rows.slice();
+  let filtered = q ? state.rows.filter(r => [r.registrationNo, r.seatNo, r.tokenNo, r.name, r.mobile, r.city, r.language, r.registrationStatus, r.gender, r.paymentStatus, r.confirmedBy].join(' ').toLowerCase().includes(q)) : state.rows.slice();
   if (filterStatus !== 'ALL') filtered = filtered.filter(r => String(r.registrationStatus || '').toUpperCase() === filterStatus);
   if (filterGender !== 'ALL') filtered = filtered.filter(r => String(r.gender || '').toLowerCase() === filterGender.toLowerCase());
   if (filterCity !== 'ALL') filtered = filtered.filter(r => String(r.city || '').toLowerCase() === filterCity.toLowerCase());
@@ -2291,18 +2345,20 @@ function renderAdmin() {
     const statusOptions = [['CONFIRMED','CONFIRMED'],['CONFIRMED_CASH_PENDING','Cash pending'],['INCOMPLETE','INCOMPLETE'],['CANCELLED','CANCELLED']];
     const sel = statusOptions.map(([value, label]) => '<option value="' + value + '"' + (value === st ? ' selected' : '') + '>' + label + '</option>').join('');
     const u = safeUrl(r.screenshotUrl);
-    return '<tr><td class="pickCell"><input type="checkbox" class="pickRow" data-reg="' + esc(r.registrationNo) + '"' + (state.bulkSelected.has(String(r.registrationNo)) ? ' checked' : '') + ' aria-label="Select ' + esc(r.registrationNo) + '"></td><td>' + esc(r.registrationNo) + '</td><td><b class="seatNoCell">' + esc(r.seatNo || '—') + '</b></td><td>' + esc(r.name) + '</td><td>' + esc(r.age) + '</td><td><span class="pill ' + (String(r.gender).toLowerCase() === 'female' ? 'female' : 'male') + '">' + esc(r.gender) + '</span>' +
+    return '<tr><td class="pickCell"><input type="checkbox" class="pickRow" data-reg="' + esc(r.registrationNo) + '"' + (state.bulkSelected.has(String(r.registrationNo)) ? ' checked' : '') + ' aria-label="Select ' + esc(r.registrationNo) + '"></td><td>' + esc(r.registrationNo) + '</td><td><b class="seatNoCell">' + esc(r.seatNo || '—') + '</b></td><td><b class="tokenNoCell">' + esc(r.tokenNo || '—') + '</b></td><td>' + esc(r.name) + '</td><td>' + esc(r.age) + '</td><td><span class="pill ' + (String(r.gender).toLowerCase() === 'female' ? 'female' : 'male') + '">' + esc(r.gender) + '</span>' +
       '</td><td>' + esc(r.city) + '</td><td>' + esc(r.mobile) + '</td><td>' + esc(r.language) + '</td><td><span class="pill ' + (/CONFIRMED|PAID|RECEIVED|SUCCESS/i.test(String(r.paymentStatus)) ? 'ok' : /CANCEL|FAIL|REJECT/i.test(String(r.paymentStatus)) ? 'bad' : 'warn') + '">' + esc(paymentStatusLabel(r.paymentStatus)) + '</span>' +
       '</td><td><select class="statusSel" data-reg="' + esc(r.registrationNo) + '">' + sel + '</select></td><td>' +
       (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">Open</a>' : '-') + '</td><td>' +
       (r.confirmedBy ? esc(r.confirmedBy) + (r.confirmedAt ? '<div class="muted" style="font-size:10px">' + esc(formatDateTime(r.confirmedAt)) + '</div>' : '') : '-') + '</td><td>' +
       '' +
+      (String(r.mobile || '').replace(/\D/g,'').length >= 10 ?
+        ' <button type="button" class="waAction" data-action="tokenWhatsApp" data-reg="' + esc(r.registrationNo) + '">📲 Send Reminder</button>' : '') +
       (String(r.registrationStatus || '').toUpperCase() === 'INCOMPLETE' ?
-        ' <button type="button" class="waAction" data-action="paymentWhatsApp" data-reg="' + esc(r.registrationNo) + '">💬 WhatsApp</button>' : '') +
+        ' <button type="button" class="waAction" data-action="paymentWhatsApp" data-reg="' + esc(r.registrationNo) + '">💬 Payment Inquiry</button>' : '') +
       (state.adminRole === 'SUPER_ADMIN' && String(r.registrationStatus || '').toUpperCase() === 'CANCELLED' ?
         ' <button type="button" class="waAction deleteAction" data-action="deleteCancelled" data-reg="' + esc(r.registrationNo) + '">🗑 Delete</button>' : '') +
       '</td></tr>';
-  }).join('') || '<tr><td colspan="14">No registrations found.</td></tr>';
+  }).join('') || '<tr><td colspan="15">No registrations found.</td></tr>';
   updateBulkSelectionUI();
 }
 async function onStatusChange(sel) {
@@ -2318,7 +2374,7 @@ async function onStatusChange(sel) {
   } catch (e) { $('adminMsg').textContent = e.message; renderAdmin(); }
 }
 function exportCsv() {
-  const cols = [['Reg No','registrationNo'],['Seat No','seatNo'],['Timestamp','timestamp'],['Name','name'],['Age','age'],['Gender','gender'],['Location','city'],
+  const cols = [['Reg No','registrationNo'],['Seat No','seatNo'],['Token No','tokenNo'],['Timestamp','timestamp'],['Name','name'],['Age','age'],['Gender','gender'],['Location','city'],
     ['Mobile','mobile'],['Language','language'],['Payment Status','paymentStatusLabel'],['Registration Status','registrationStatus'],['Screenshot','screenshotUrl'],['Admin Note','adminNote']];
   const cell = v => { v = String(v == null ? '' : v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
   const csv = '\ufeff' + [cols.map(c => cell(c[0])).join(',')].concat(state.rows.map(r => cols.map(c => cell(c[1] === 'paymentStatusLabel' ? paymentStatusLabel(r.paymentStatus) : r[c[1]])).join(','))).join('\r\n');
@@ -2375,7 +2431,7 @@ function bulkToggleRow(cb) {
   updateBulkSelectionUI();
 }
 function fillBulkTemplate(template, r) {
-  return String(template || '').replace(/\{\{\s*(name|seatNo|registrationNo|mobile|gender|city|language)\s*\}\}/gi, (_, k) => String(r[k] || (k.toLowerCase() === 'seatno' ? 'Not assigned yet' : '')));
+  return String(template || '').replace(/\{\{\s*(name|tokenNo|seatNo|registrationNo|mobile|gender|city|language)\s*\}\}/gi, (_, k) => String(r[k] || (k.toLowerCase() === 'seatno' ? 'Not assigned yet' : '')));
 }
 function bulkPreview() {
   const rows = getBulkRows();
@@ -2393,15 +2449,15 @@ function bulkSendAll() {
   const delay = Math.max(4, Number($('bulkDelay').value) || 8);
   if (!rows.length) { $('bulkMsg').textContent = 'No valid recipients found for the current search/filter.'; return; }
   if (!template) { $('bulkMsg').textContent = 'Enter the WhatsApp message first.'; return; }
-  if (!window.confirm('Prepare ' + rows.length + ' WhatsApp messages for sending? The local sender will send them one-by-one.')) return;
+  if (!window.confirm('Prepare ' + rows.length + ' WhatsApp messages? Token reminders will be personalized in each participant’s selected language. The local sender will send them one-by-one.')) return;
   const queue = {
     version: 1,
     createdAt: new Date().toISOString(),
     delaySeconds: delay,
     workshop: 'TAHAFFUZ-E-AQeedah WA MANHAJ - Ek Rozah Tarbiyati Workshop',
     recipients: rows.map(r => ({
-      registrationNo: r.registrationNo || '', seatNo: r.seatNo || '', name: r.name || '', mobile: String(r.mobile || '').replace(/\D/g,''), gender: r.gender || '', city: r.city || '', language: r.language || '',
-      message: fillBulkTemplate(template, r)
+      registrationNo: r.registrationNo || '', seatNo: r.seatNo || '', tokenNo: r.tokenNo || '', name: r.name || '', mobile: String(r.mobile || '').replace(/\D/g,''), gender: r.gender || '', city: r.city || '', language: r.language || '',
+      message: ($('bulkMessageType') && $('bulkMessageType').value === 'tokenReminder') ? whatsappTokenReminderMessage(r) : fillBulkTemplate(template, r)
     }))
   };
   downloadBlob('TRW_whatsapp_queue.json', JSON.stringify(queue, null, 2), 'application/json');
@@ -2470,6 +2526,7 @@ const actions = {
   manualParse: parseManualText,
   manualSave: saveManualRegistration,
   paymentWhatsApp: t => { const r = state.rows.find(x => x.registrationNo === t.dataset.reg); if (r) whatsappPaymentReminder(r); },
+  tokenWhatsApp: t => { const r = state.rows.find(x => x.registrationNo === t.dataset.reg); if (r) whatsappTokenReminder(r); },
   history: t => showHistory(t.dataset.reg),
   deleteCancelled: t => deleteCancelled(t.dataset.reg),
   createAdmin: createAdmin,
@@ -2531,6 +2588,7 @@ else fetchT(BASE + '/auth/v1/health', { headers: sbHeaders() }, 15000).then(func
   if ($('interestError')) $('interestError').textContent = 'Unable to connect to the form service. Please try again later.';
 });
 })();
+document.addEventListener('DOMContentLoaded', function(){ const t=document.getElementById('bulkMessageType'), m=document.getElementById('bulkMessage'); if(t&&m){ const sync=()=>{m.disabled=t.value==='tokenReminder'; m.style.opacity=m.disabled?'.78':'1';}; t.addEventListener('change',sync); sync(); }});
 </script>
 </body>
 </html>
