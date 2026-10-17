@@ -422,11 +422,11 @@ td .error{margin:0;font-size:inherit}
   .tblParticipants{table-layout:fixed;width:100%;min-width:0}
   .tblParticipants th,.tblParticipants td{white-space:normal;overflow-wrap:anywhere;word-break:normal;padding:8px 5px;font-size:12px;line-height:1.3;vertical-align:middle}
   .tblParticipants th{font-size:10px;letter-spacing:0;line-height:1.2;overflow-wrap:normal}
-  /* Column order: Select, Reg No, Seat No, Name, Age, Gender, City, Mobile, Language, Payment, Status, Screenshot, Confirmed By, Action */
+  /* Column order: Select, Reg No, Seat No, Token No, Name, Age, Gender, City, Mobile, Language, Payment, Status, Screenshot, Confirmed By, Action */
   .tblParticipants th:nth-child(1),.tblParticipants td:nth-child(1){width:2%;text-align:center}
   .tblParticipants th:nth-child(2),.tblParticipants td:nth-child(2){width:8%;white-space:nowrap;overflow-wrap:normal}
   .tblParticipants th:nth-child(3),.tblParticipants td:nth-child(3){width:4%;white-space:nowrap;overflow-wrap:normal}
-  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){width:13%;overflow-wrap:anywhere}
+  .tblParticipants th:nth-child(4),.tblParticipants td:nth-child(4){width:5%;white-space:nowrap;overflow-wrap:normal;text-align:center}
   .tblParticipants th:nth-child(5),.tblParticipants td:nth-child(5){width:4%;text-align:center}
   .tblParticipants th:nth-child(6),.tblParticipants td:nth-child(6){width:6%}
   .tblParticipants th:nth-child(7),.tblParticipants td:nth-child(7){width:8%}
@@ -1311,10 +1311,10 @@ body{letter-spacing:.005em}
   #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4),
   #adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5),
   #adminCard .tblParticipants th:nth-child(15),#adminCard .tblParticipants td:nth-child(15){display:table-cell!important}
-  #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){width:74px;min-width:74px;max-width:74px;text-align:center}
+  #adminCard .tblParticipants th:nth-child(4),#adminCard .tblParticipants td:nth-child(4){width:56px;min-width:56px;max-width:56px;text-align:center;white-space:nowrap}
   #adminCard .tblParticipants th:nth-child(5),#adminCard .tblParticipants td:nth-child(5){width:auto;min-width:0;max-width:none;white-space:normal;overflow-wrap:anywhere}
   #adminCard .tblParticipants th:nth-child(15),#adminCard .tblParticipants td:nth-child(15){width:128px;min-width:128px;max-width:128px;text-align:center}
-  #adminCard .tblParticipants td:nth-child(4) .tokenNoCell{font-size:14px;padding:5px 7px}
+  #adminCard .tblParticipants td:nth-child(4) .tokenNoCell{font-size:13px;padding:3px 4px;max-width:100%;box-sizing:border-box}
   #adminCard .tblParticipants td:nth-child(5){font-size:12px;font-weight:750}
   #adminCard .tblParticipants .waAction{display:block;width:100%;margin:0;padding:9px 5px;font-size:11px;line-height:1.15;white-space:normal}
   #adminCard .tblParticipants tbody tr td{padding:8px 5px;vertical-align:middle}
@@ -1435,29 +1435,18 @@ body{letter-spacing:.005em}
   </div>
   <div id="dashboard" hidden>
    <div id="adminRoleBadge" class="notice green" style="margin-top:12px"></div>
-   <details id="superAdminPanel" class="bulkBox" hidden style="margin-top:10px">
-    <summary><span>🛡️ Super Admin — Manage Administrators</span></summary>
+   <details class="bulkBox" id="overallSummaryPanel">
+    <summary><span>📊 Overall Summary</span></summary>
     <div class="bulkInner">
-     <div class="sub">Create separate Male/Female admins. Each admin gets a unique PIN. Every payment confirmation records the admin name and time.</div>
-     <div class="manualGrid" style="margin-top:8px">
-      <div class="field"><label for="newAdminName">ADMIN NAME *</label><input id="newAdminName" placeholder="e.g. Ahmed Shaikh"></div>
-      <div class="field"><label for="newAdminPin">NEW ADMIN PIN *</label><input id="newAdminPin" type="password" inputmode="numeric" maxlength="8" placeholder="4–8 digits"></div>
-      <div class="field"><label for="newAdminRole">HANDLING GENDER *</label><select id="newAdminRole"><option value="MALE">Male registrations</option><option value="FEMALE">Female registrations</option></select></div>
+     <div class="sub">Summary is visible to both Male and Female administrators.</div>
+     <div class="stats" id="stats"></div>
+     <div class="summaryTitle">Gender-wise Status</div>
+     <div class="genderSummary" id="genderSummary">
+      <div class="genderCard"><b>👨 Male</b><div class="genderLine"><span>Confirmed</span><strong id="maleConfirmed">0</strong></div><div class="genderLine"><span>Pending</span><strong id="malePending">0</strong></div></div>
+      <div class="genderCard"><b>👩 Female</b><div class="genderLine"><span>Confirmed</span><strong id="femaleConfirmed">0</strong></div><div class="genderLine"><span>Pending</span><strong id="femalePending">0</strong></div></div>
      </div>
-     <div id="superAdminError" class="error" role="alert"></div>
-     <button type="button" class="primary" data-action="createAdmin">➕ Create Admin</button>
-     <div class="summaryTitle" style="margin-top:14px">Administrators</div>
-     <div class="tableWrap"><table class="tblAdmins"><thead><tr><th>Name</th><th>Role</th><th>Access</th><th>Created</th><th>Action</th></tr></thead><tbody id="adminAccountsRows"></tbody></table></div>
     </div>
    </details>
-   <div class="title" style="margin-top:14px">Overall Summary</div>
-   <div class="sub">Summary is visible to both Male and Female administrators.</div>
-   <div class="stats" id="stats"></div>
-   <div class="summaryTitle">Gender-wise Status</div>
-   <div class="genderSummary" id="genderSummary">
-    <div class="genderCard"><b>👨 Male</b><div class="genderLine"><span>Confirmed</span><strong id="maleConfirmed">0</strong></div><div class="genderLine"><span>Pending</span><strong id="malePending">0</strong></div></div>
-    <div class="genderCard"><b>👩 Female</b><div class="genderLine"><span>Confirmed</span><strong id="femaleConfirmed">0</strong></div><div class="genderLine"><span>Pending</span><strong id="femalePending">0</strong></div></div>
-   </div>
    <div class="field"><input id="adminSearch" placeholder="Search your gender's records..."></div>
    <details class="bulkBox">
     <summary><span>📲 Bulk WhatsApp Updates <span class="pcOnly">PC only</span></span></summary>
@@ -1500,8 +1489,10 @@ Please keep your token number safe and collect/confirm it with the volunteers at
    </details>
    <div class="row2"><button type="button" class="secondary" data-action="adminRefresh">↻ Refresh</button><button type="button" class="secondary" data-action="adminExport">⬇ Export My Records</button></div>
    <div id="adminMsg" class="muted" style="margin-top:8px"></div>
-   <div class="participantControls">
-    <div class="participantControlsTitle">↕ Sort &amp; Filter Participants</div>
+   <details class="bulkBox" id="participantSortFilterPanel">
+    <summary><span>↕ Sort &amp; Filter Participants</span></summary>
+    <div class="bulkInner">
+     <div class="participantControls">
     <div class="participantControlGrid">
      <label class="participantControl"><span>Sort by</span><select id="participantSort" aria-label="Sort participants">
       <option value="default">Newest first (default)</option><option value="registrationNo">Registration No.</option><option value="seatNo">Seat No.</option><option value="tokenNo">Token No.</option><option value="name">Name</option><option value="age">Age</option><option value="gender">Gender</option><option value="city">Location</option><option value="mobile">Mobile</option><option value="language">Language</option><option value="paymentStatus">Payment</option><option value="registrationStatus">Registration Status</option><option value="confirmedBy">Confirmed By</option><option value="timestamp">Registration Time</option>
@@ -1514,7 +1505,9 @@ Please keep your token number safe and collect/confirm it with the volunteers at
      <label class="participantControl"><span>Payment</span><select id="participantFilterPayment" aria-label="Filter by payment status"><option value="ALL">All payments</option><option value="PAID">Paid / Confirmed</option><option value="PENDING">Pending / Not paid</option><option value="FAILED">Failed / Rejected</option></select></label>
     </div>
     <div class="participantFilterFooter"><span id="participantResultCount" aria-live="polite">Showing participants</span><button type="button" class="selectBtn" id="clearParticipantFilters">Reset filters</button></div>
-   </div>
+     </div>
+    </div>
+   </details>
    <div class="tableWrap"><table class="tblParticipants"><thead><tr><th class="pickHead"><input type="checkbox" id="bulkSelectAllTable" data-action="bulkSelectAll" title="Select all visible"></th><th>Reg No</th><th>Seat No</th><th>Token No</th><th>Name</th><th>Age</th><th>Gender</th><th>City</th><th>Mobile</th><th>Language</th><th>Payment</th><th>Status</th><th>Screenshot</th><th>Confirmed By</th><th>Action</th></tr></thead><tbody id="adminRows"></tbody></table></div>
   </div>
  </div>
@@ -2069,7 +2062,7 @@ function shareConfirm() {
 function openAdmin() {
   showScreen('adminCard');
   if (state.pin) return;
-  $('adminLogin').hidden = false; $('dashboard').hidden = true; $('superAdminPanel').hidden = true;
+  $('adminLogin').hidden = false; $('dashboard').hidden = true;
   $('pin').value = ''; $('adminError').textContent = '';
   setTimeout(() => $('pin').focus(), 100);
 }
@@ -2082,8 +2075,6 @@ async function adminLogin(pinArg, force) {
     if (!res || res.ok === false) throw new Error((res && res.message) || 'Invalid admin PIN or unable to load dashboard.');
     state.pin = pin; state.adminRole = res.role || ''; state.adminId = res.adminId || null; state.adminName = res.adminName || ''; state.rows = res.rows || [];
     $('adminRoleBadge').innerHTML = '<b>' + esc(res.adminName || 'Admin') + '</b> — ' + esc(res.role || 'Admin') + ' ADMIN' + (res.role === 'SUPER_ADMIN' ? ' — full access' : ' — participant details are restricted to this gender.');
-    $('superAdminPanel').hidden = res.role !== 'SUPER_ADMIN';
-    if (res.role === 'SUPER_ADMIN') loadAdminAccounts();
     $('adminLogin').hidden = true; $('dashboard').hidden = false;
     const stats = res.stats || {};
     renderStats(stats); renderAdmin();
@@ -2258,7 +2249,7 @@ function formatDateTime(v) {
   try { return new Date(v).toLocaleString('en-IN', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}); } catch(e) { return String(v || ''); }
 }
 async function loadAdminAccounts() {
-  if (state.adminRole !== 'SUPER_ADMIN') return;
+  if (state.adminRole !== 'SUPER_ADMIN' || !$('adminAccountsRows')) return;
   try {
     const res = await call('adminListAccounts', [state.pin]);
     if (!res || res.ok === false) throw new Error((res && res.message) || 'Unable to load administrators.');
